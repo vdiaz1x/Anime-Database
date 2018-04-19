@@ -15,10 +15,10 @@ Database to track user's anime favorites and search anime info
 |Day 6: Mon| Bugs | // |
 |Day 7: Tues| Project Presentations | // |
 
-<!-- 
+
 ## Project Description
 
-This project is based off of a typical RPG boss battle. The idea is to model it after a traditional turn based combat system commonly found in JRPGS like Final Fantasy or Dragon Quest, mixed in with modern presentation a la Japanese mobile games like Fate/Grand Order and Granblue Fantasy. Also, the idea of having an exciting and thematic UI/UX for the game, like what is found in Persona 5, is appealing both in making the game stand out and also make the game flavorful from a visual standpoint.
+This project is a database for searching anime and for logging your list of watched shows via a user account.
 
 ## Wireframes
 
@@ -33,85 +33,55 @@ This project is based off of a typical RPG boss battle. The idea is to model it 
 
 ## Presentation
 
-[Link to PDF](https://drive.google.com/open?id=1caY5fqkGW7fh2OzUsxrJUvpTAVshe3kh94AhaSd3fNg)
+[Link to PDF]()
 
 ## Priority Matrix
 
 ### High Priority
-- Game Logic (Battle Calculation and Turn Loop)
-- Win Condition
+- MVC Template
+- Database Queries
+- Controller/View Functions
+- Server
 
 ### Medium Priority
-- Basic Game Styling
-- Landing Page
-- Restart
+- Views (Basic EJS Styling)
+- API Call
+- Debugging
 
 ## Low Priority
-- Advanced Game Styling
+- Views (Advanced EJS Styling)
 - Add PostMVP Features
 
 ## User Stories
 
-### Landing Page
+### User Account
 
-- As a player, I want to be able to see a beginning and enter a choice whether I want to play
+- As a user of this site, I expect to be able to sign up for an account
+- I expect to be able to save shows to my list on my account
+- I expect to be able to add comments to my list and to edit/delete list items
 
-### Game Initialization
+### Search
 
-- As a player, I expect to have a character select screen to select who I am playing as, as well as choose my enemy
-
-### Playing The Game
-
-- As a player, I want to see all the visuals needed to play (status/life totals for allies and for enemies)
-- As a player, I expect that selecting my moves for my turn to be simple
-- As a player, I expect to see indication of my attacks working
-- As a player, I want to see good visual effects
-
-### Winning The Game
-
-- As a player, I expect to see a confirmation of winning
-- As a player, I expect to see a confirmation of losing
-
-### Game Reset
-
-- As a player, I want to see a way to return to the character select screen and fight again
+- As a user, I expect to be able to use a search function to find shows
+- I expect the search to be able to find shows based on genre/other criteria (PostMVP)
 
 ## Game Components
 
 ### Landing Page
-The idea is to start the battle with a question- if you really want to fight a monster. If you are ready, you will then select the boss you will fight, as well as your party.
+A simple intro page
 
-### Game Initialization
-When the battle is started, you will see the boss you selected earlier and your party, as well as the relevant meters for HP/MP values
+### Search Page
+A page to search a show via a fetch call
 
-### Playing The Game
-The player has to select an attack from each ally. After attack selection, the allies will attack the boss, one at a time. If the boss is not dead, the boss will attack. If your party is not dead after the boss attack, then you will return to select attacks to hit the boss with.
+### User Page
+A page for the user information. It displays the list of shows the user has saved, as well as edit/delete options
 
-#### Battle Start
-- Display Enemy and Allies
-- Select Ally Attack, One at a Time
-- Confirm Ally Attack Selection
-
-#### Battle Sequence
-- Allies Attack, One at a Time
-- Boss HP Goes Down With Every Attack
-- If Boss HP > 0, Boss Attacks Allies. Else, Boss dies (Win Con)
-- If Ally HP < 0, Ally Cannot Attack. If All Allies' HP < 0, No Allies Can Attack (Lose Con).
-- If Both Boss and Allies' HP > 0, Turn Over And Next Attack Phase Begins (Battle Start)
-
-#### Post-Battle
-- Battle Message Depending on Win or Lose Con
-- After Battle Message, Option to Go Back to Main Character Selection
-
-### Winning The Game
-Once the boss' HP reaches zero, you win the game. If the HP of all your allies reaches zero, you lose.
-
-### Game Reset
-After a win or loss, you will have the option to go back and select a new enemy to fight.
+### Show Page
+A page to display relevant information of the show queried
 
 ## MVP
 
-### Deliverables
+<!-- ### Deliverables
 
 - Landing Page with Message (Get Name)
 - Select Player Avatar and Allies
@@ -136,7 +106,7 @@ After a win or loss, you will have the option to go back and select a new enemy 
 - Dialogue in Battle
 - Change Boss Behavior Based on HP
 
-## Functional Components 
+## Functional Components
 
 | Component | Priority | Estimated Time | Time Invetsted | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
@@ -160,9 +130,9 @@ My time estimates were way off. Also, I underestimated the scope and difficulty 
 
 ## Helper Functions
 
-| Function | Description | 
-| --- | :---: |  
-| Progress | Tracks progress of a quantity | 
+| Function | Description |
+| --- | :---: |
+| Progress | Tracks progress of a quantity |
 
 ## Additional Libraries
  JQuery - for DOM manipulation and other useful functions
@@ -223,13 +193,13 @@ Instead of creating objects for all of my characters, I made classes. I realized
 
 #### Error/Resolution
 
-**ERROR**: eslint regenerator-runtime, prefer iteration to loops                             
+**ERROR**: eslint regenerator-runtime, prefer iteration to loops
 **RESOLUTION**: Instead of using for...of loops for arrays, I used forEach
 
-**ERROR**: eslint object deconstructing                     
+**ERROR**: eslint object deconstructing
 **RESOLUTION**: I had to switch the way I got the class name for my objects (minor semantic detail)
 
-**ERROR**: eslint function used before it was declared            
+**ERROR**: eslint function used before it was declared
 **RESOLUTION**: I moved function declarations higher up
 
 ## References
