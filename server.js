@@ -8,50 +8,53 @@ const session = require('express-session');
 // const authService = require('./auth/service');
 // const authRouter = require('./auth/router');
 
+// setting up the routers
+const routes = require('./routes/routes');
+
 // require.env config
 require('dotenv').config();
 
-//setting up the port
-const port = process.env.PORT || 3000;
+// setting up the port
+const port = process.env.PORT || 4000;
 
-//setting up express
+// setting up express
 const app = express();
 
-//setting up the logger in dev mode
-app.use(logger('dev'))
+// setting up the logger in dev mode
+app.use(logger('dev'));
 
 // setting up the secret env variable for session
 // app.set('secret', process.env.SECRET);
 
-//setting up the session for authentification
+// setting up the session for authentification
 // app.use(session({
 //   secret: app.get('secret'),
 //   resave: false,
 //   saveUninitialized: false,
 // }));
 
-//setting up the body parser
+// setting up the body parser
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
-//setting up the ejs engine
+// setting up the ejs engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-//what does this do? find the public folder?
+// what does this do? find the public folder?
 app.use(express.static(path.join(__dirname, 'css')));
 
-//setting up method override
+// setting up method override
 app.use(override('_method'));
 
-//listening to the port
+// listening to the port
 app.listen(port, () => console.log(`Listening on port: ${port} in ${app.get('env')} mode!`))
-   .on('error', console.error);
+  .on('error', console.error);
 
-//using router
-//nothing here yet
+// using router
+app.use('/route', routes);
 
-//using auth router
+// using auth router
 // app.use('/auth', authRouter)
 
 // auth route
@@ -61,11 +64,19 @@ app.listen(port, () => console.log(`Listening on port: ${port} in ${app.get('env
 //   res.json(req.session)
 // });
 
-//default route
+// default route
 app.get('/', (req, res) => {
-  res.send('i am home');
-  //renders the index page
-  // res.render('home/index')
+  // res.send('i am home');
+  // renders the index page
+  // fetch('http://example.com/movies.json')
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (myJson) {
+  //     console.log(myJson);
+  //   });
+
+  res.render('ejs/index');
 });
 
 app.use((err, req, res, next) => {

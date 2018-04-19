@@ -1,31 +1,44 @@
 // import pg promise
 const pgp = require('pg-promise')();
 
-//import config
+// import config
 const config = require('../config/config');
 
-//set up db connection
+// set up db connection
 const db = pgp(config);
 
-//creating object to export models
+// creating object to export models
 const models = {};
 
 // models for main route
 // gets all table data
-models.findAll(){};
+models.findAll = () => {
+  console.log('models findall');
+  return db.many(`
+  SELECT * FROM users
+  `);
+};
 
 // makes one data entry in table
-models.saveOne(data){};
+models.saveOne = (data) => {
+  console.log('models saveone');
+};
 
-//models for id route
+// models for id route
 // gets one table data entry
-models.findById(id){};
+models.findById = (id) => {
+  console.log('models findid');
+};
 
 // updates one table data entry
-models.updateById(id, data){};
+models.updateById = (id, data) => {
+  console.log('models updateid');
+};
 
 // deletes one table data entry
-models.deleteById(id){};
+models.deleteById = (id) => {
+  console.log('models deleteid');
+};
 
-//exporting models
+// exporting models
 module.exports = models;
