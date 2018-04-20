@@ -11,6 +11,18 @@ const db = pgp(config);
 const models = {};
 
 // models for main route
+
+// what do we need the models for?
+// create users (/user/new)
+// delete users (/users)
+// create comments (/users/comments)
+// update comments (users/comments)
+// delete comments (users/comments)
+// get query of shows (/anime)
+// get one show (anime/id)
+// show user list of shows (users/shows)
+
+
 // gets all table data
 models.findAll = () => {
   console.log('models findall');
@@ -18,26 +30,36 @@ models.findAll = () => {
   SELECT * FROM users
   `);
 };
-
 // makes one data entry in table
 models.saveOne = (data) => {
   console.log('models saveone');
 };
-
 // models for id route
 // gets one table data entry
 models.findById = (id) => {
   console.log('models findid');
 };
-
 // updates one table data entry
 models.updateById = (id, data) => {
   console.log('models updateid');
 };
-
 // deletes one table data entry
 models.deleteById = (id) => {
   console.log('models deleteid');
+};
+// user
+models.saveUser = (data) => {
+  return db.one(`
+  INSERT INTO users
+    (fname, lname, username, password_hash)
+  VALUES
+    ( $/fname/,
+      $/lname/,
+      $/username/,
+      $/password_hash/
+      )
+  `);
+  console.log('models saveone');
 };
 
 // exporting models

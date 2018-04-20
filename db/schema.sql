@@ -1,3 +1,6 @@
+-- run script to create database and tables
+-- psql -f db/schema.sql
+
 -- drop database if it exists
 DROP DATABASE IF EXISTS anime_db_dev;
 
