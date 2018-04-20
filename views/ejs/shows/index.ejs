@@ -1,10 +1,17 @@
 <% include ../partials/head %>
 
 <h1>show all the anime from query</h1>
-<h1><%= anime.data.id%></h1>
-<h1><%= anime.data.attributes.titles.en_jp%></h1>
-<img src="<%= anime.data.attributes.posterImage.tiny%>" alt="">
 
-<a href="show/<%= anime.data.id%>">Link to show</a>
+<% anime.data.forEach(show => { %>
+  <h1>
+    <%= show.id%>
+  </h1>
+  <h1>
+    <%= show.attributes.titles.en_jp%>
+  </h1>
+  <img src="<%= show.attributes.posterImage.tiny%>" alt="">
+
+  <a href="show/<%= show.id%>">Link to show</a>
+<% })%>
 
 <% include ../partials/foot %>

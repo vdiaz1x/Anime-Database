@@ -72,11 +72,13 @@ controller.makeUser = (req, res, next) => {
 controller.search = (req, res, next) => {
   console.log(req.body);
   // fetch('https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=mecha');
-  const anime_query = req.body.id;
-  fetch(`https://kitsu.io/api/edge/anime/${anime_query}`)
+  const anime_query = req.body.query;
+  fetch(`https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=${anime_query}`)
     .then(res => res.json())
     .then((json) => {
       // res.send(json);
+      // console.log(json);
+
       res.locals.anime = json;
       next();
     })

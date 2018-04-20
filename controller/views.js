@@ -48,6 +48,7 @@ views.showAllShows = (req, res) => {
   console.log(res.locals.anime);
   // res.json(req);
   res.render('ejs/shows/index', { anime: res.locals.anime });
+  console.log({ anime: res.locals.anime })
 };
 
 views.showOneShow = (req, res) => {
