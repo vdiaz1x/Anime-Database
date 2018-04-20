@@ -47,18 +47,21 @@ models.updateById = (id, data) => {
 models.deleteById = (id) => {
   console.log('models deleteid');
 };
+
 // user
 models.saveUser = (data) => {
   return db.one(`
   INSERT INTO users
     (fname, lname, username, password_hash)
   VALUES
-    ( $/fname/,
+    (
+      $/fname/,
       $/lname/,
       $/username/,
       $/password_hash/
-      )
-  `);
+    )
+  RETURNING * `, data);
+
   console.log('models saveone');
 };
 

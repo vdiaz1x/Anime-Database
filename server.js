@@ -11,6 +11,7 @@ const session = require('express-session');
 // setting up the routers
 const routes = require('./routes/routes');
 const user = require('./routes/user');
+const shows = require('./routes/shows');
 
 // require.env config
 require('dotenv').config();
@@ -55,6 +56,7 @@ app.listen(port, () => console.log(`Listening on port: ${port} in ${app.get('env
 // using router
 app.use('/route', routes);
 app.use('/user', user);
+app.use('/show', shows);
 
 // using auth router
 // app.use('/auth', authRouter)

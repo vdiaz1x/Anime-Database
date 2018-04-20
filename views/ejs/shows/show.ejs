@@ -1,5 +1,8 @@
-<% include ../ejs/partials/head %>
+<% include ../partials/head %>
 
 <h1>show one anime from query</h1>
+<h1><%= anime.data.id%></h1>
+<h1><%= anime.data.attributes.titles.en_jp%></h1>
+<img src="<%= anime.data.attributes.posterImage.tiny%>" alt="">
 
-<% include ../ejs/partials/foot %>
+<% include ../partials/foot %>
