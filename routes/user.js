@@ -28,7 +28,7 @@ router.route('/new')
 
 router.route('/login')
   .get(views.showLogin)
-  .post(controller.login, views.handleCreateUser);
+  .post(controller.login, views.showUser);
 
 
 

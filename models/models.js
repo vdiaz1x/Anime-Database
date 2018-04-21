@@ -73,5 +73,13 @@ models.findUserId = (id) => {
   `, id)
 }
 
+models.findUserName = (id) => {
+  return db.one(`
+  SELECT username, password_hash, id
+  FROM users
+  WHERE username = $1
+  `, id)
+}
+
 // exporting models
 module.exports = models;

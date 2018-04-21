@@ -41,12 +41,13 @@ views.showLogin = (req, res) => {
 
 views.handleCreateUser = (req, res) => {
   console.log('views handlecreatedelete');
-  res.redirect('user/user');
+  // console.log(res.locals.data)
+  res.redirect(`user/${res.locals.data.id}`);
 };
 
 views.showUser = (req, res) => {
   console.log('views handlecreatedelete');
-  res.render('ejs/user/profile', { user: res.locals.user });
+  res.render('ejs/user/profile', { user: res.locals.data });
 };
 
 // views.handleLogIn = (req, res) => {

@@ -64,15 +64,18 @@ controller.findUser = (req, res, next) => {
   console.log('controller find');
 };
 
-controller.makeUser = (req, res, next) => {
+controller.makeUser = async (req, res, next) => {
+  req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
+  console.log('outside', req.body);
+
   models.saveUser(req.body)
     .then((data) => {
       res.locals.data = data;
-      console.log(data);
+      console.log('inside', data);
       next();
     })
     .catch((err) => {
-      console.log(err);
+      console.log('error error error', err);
       res.json(err);
     });
 
@@ -80,18 +83,32 @@ controller.makeUser = (req, res, next) => {
 };
 
 controller.login = async (req, res, next) => {
+  // try block to compare hashes/validate user
+  // async function
   try {
+    // grabs username and password from request
     const { username, password } = req.body;
-    const user = await models.findUserId(username);
+    console.log(req.body);
+    // finds the user info from model
+    const user = await models.findUserName(username);
+
+    // compares the password hash in db to newly made hash pw
+    // returns boolean
     const valid = await bcrypt.compare(password, user.password_hash);
 
+    // if not valid, throw error
+    // manual throw err because bcyrpt does not throw own errors
     if (!valid) {
       throw { message: 'wrong password' };
     }
-
+    res.locals.data = user;
+    // saving the session with user data
     req.session.user = user;
     next();
-  } catch (err) {
+  }
+  // catches error
+  catch (err) {
+    console.log('THIS IS THE ERROR', err);
     next(err);
   }
 

@@ -11,15 +11,15 @@ CREATE DATABASE anime_db_dev;
 \c anime_db_dev
 
 -- drop tables if they exist
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_faves;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS user_faves CASCADE;
 
 --create table for users
-CREATE table users (
+CREATE TABLE users (
   id              SERIAL PRIMARY KEY NOT NULL,
   fname           TEXT,
   lname           TEXT,
-  username        TEXT,
+  username        TEXT UNIQUE,
   password_hash   TEXT
 );
 
