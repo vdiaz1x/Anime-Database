@@ -40,16 +40,21 @@ views.showLogin = (req, res) => {
 };
 
 views.handleCreateUser = (req, res) => {
-  console.log('views handlecreatedelete');
+  console.log('views handle create user');
   // console.log(res.locals.data)
   res.redirect(`user/${res.locals.data.id}`);
 };
 
 views.showUser = (req, res) => {
-  console.log('views handlecreatedelete');
+  console.log('views show user');
   res.render('ejs/user/profile', { user: res.locals.data });
+  console.log('THIS IS USER', user);
 };
 
+views.incorrectLogin = (err, req, res, next) => {
+  console.log('views error user');
+  res.render('ejs/user/error');
+};
 // views.handleLogIn = (req, res) => {
 //   console.log('views handlelogin');
 //   res.redirect('user/user');

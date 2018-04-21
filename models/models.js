@@ -67,7 +67,7 @@ models.saveUser = (data) => {
 
 models.findUserId = (id) => {
   return db.one(`
-  SELECT username
+  SELECT *
   FROM users
   WHERE id = $1
   `, id)
