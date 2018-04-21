@@ -10,15 +10,11 @@ const models = require('../models/models');
 // import fetch
 const fetch = require('node-fetch');
 
+// import bcrypt
+const bcrypt = require('bcrypt');
+
 // storing controller functions in an for export
 const controller = {};
-
-// const resData = (data) => {
-//   res.locals.data = data;
-//   next();
-// };
-
-// const errData = err => res.json(err);
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +49,21 @@ controller.destroy = (req, res, next) => {
 };
 
 // users
+controller.findUser = (req, res, next) => {
+  models.findUserId(req.params.id)
+    .then((data) => {
+      res.locals.user = data;
+      console.log(data);
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
+
+  console.log('controller find');
+};
+
 controller.makeUser = (req, res, next) => {
   models.saveUser(req.body)
     .then((data) => {
@@ -68,22 +79,37 @@ controller.makeUser = (req, res, next) => {
   console.log('controller make');
 };
 
+controller.login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const user = await models.findUserId(username);
+    const valid = await bcrypt.compare(password, user.password_hash);
+
+    if (!valid) {
+      throw { message: 'wrong password' };
+    }
+
+    req.session.user = user;
+    next();
+  } catch (err) {
+    next(err);
+  }
+
+  console.log('controller login');
+};
+
 // shows
 controller.search = (req, res, next) => {
-  console.log(req.body);
-  // fetch('https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=mecha');
+  // grabbing the query parameter from the req.body (from the search form)
   const anime_query = req.body.query;
+  // fetch call for API w/ dynamic variable
   fetch(`https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=${anime_query}`)
     .then(res => res.json())
     .then((json) => {
-      // res.send(json);
-      // console.log(json);
-
       res.locals.anime = json;
       next();
     })
     .catch((err) => {
-      // console.log(err);
       res.json(err);
     });
 };

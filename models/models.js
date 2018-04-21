@@ -65,5 +65,13 @@ models.saveUser = (data) => {
   console.log('models saveone');
 };
 
+models.findUserId = (id) => {
+  return db.one(`
+  SELECT username
+  FROM users
+  WHERE id = $1
+  `, id)
+}
+
 // exporting models
 module.exports = models;

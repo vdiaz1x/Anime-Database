@@ -9,18 +9,12 @@ views.showAll = (req, res) => {
   console.log('views showall');
   res.send(res.locals.data);
 };
-
 // shows the ejs for one data query
 views.showOne = (req, res) => {
   console.log('views showone');
   res.send('hello');
 };
-// shows the ejs for the form
-views.showForm = (req, res) => {
-  console.log('views showform');
-  // res.send('hello');
-  res.render('ejs/user/signup');
-};
+
 // redirects for create one data entry
 views.handleCreateDelete = (req, res) => {
   console.log('views handlecreatedelete');
@@ -33,10 +27,32 @@ views.handleUpdate = (req, res) => {
 };
 
 // users
+
+// shows the ejs for the form
+views.showForm = (req, res) => {
+  console.log('views showform');
+  res.render('ejs/user/signup');
+};
+
+views.showLogin = (req, res) => {
+  console.log('views showform');
+  res.render('ejs/user/login');
+};
+
 views.handleCreateUser = (req, res) => {
   console.log('views handlecreatedelete');
   res.redirect('user/user');
 };
+
+views.showUser = (req, res) => {
+  console.log('views handlecreatedelete');
+  res.render('ejs/user/profile', { user: res.locals.user });
+};
+
+// views.handleLogIn = (req, res) => {
+//   console.log('views handlelogin');
+//   res.redirect('user/user');
+// };
 
 // shows
 views.showSearch = (req, res) => {
@@ -48,7 +64,7 @@ views.showAllShows = (req, res) => {
   console.log(res.locals.anime);
   // res.json(req);
   res.render('ejs/shows/index', { anime: res.locals.anime });
-  console.log({ anime: res.locals.anime })
+  console.log({ anime: res.locals.anime });
 };
 
 views.showOneShow = (req, res) => {
@@ -58,7 +74,3 @@ views.showOneShow = (req, res) => {
 };
 
 module.exports = views;
-
-// fetch('https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=mecha')
-//   .then(res => res.json())
-//   .then(json => res.send(json));

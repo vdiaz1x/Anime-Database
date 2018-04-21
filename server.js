@@ -1,3 +1,6 @@
+// require the .env
+require('dotenv').config();
+
 // require all modules (dependencies)
 const express = require('express');
 const logger = require('morgan');
@@ -26,14 +29,14 @@ const app = express();
 app.use(logger('dev'));
 
 // setting up the secret env variable for session
-// app.set('secret', process.env.SECRET);
+app.set('secret', process.env.SECRET);
 
 // setting up the session for authentification
-// app.use(session({
-//   secret: app.get('secret'),
-//   resave: false,
-//   saveUninitialized: false,
-// }));
+app.use(session({
+  secret: app.get('secret'),
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // setting up the body parser
 app.use(parser.json());
@@ -61,28 +64,19 @@ app.use('/show', shows);
 // using auth router
 // app.use('/auth', authRouter)
 
-// auth route
-// app.get('/profile', authService.login, (req, res) => {
+// // auth route
+// app.get('/profile', controller.login, (req, res) => {
 //   // res.render('welcome.ejs')
 //   // res.send('send')
-//   res.json(req.session)
+//   res.json(req.session);
 // });
 
 // default route
 app.get('/', (req, res) => {
-  // res.send('i am home');
-  // renders the index page
-  // fetch('http://example.com/movies.json')
-  //   .then(function (response) {
-  //     return response.json();
-  //   })
-  //   .then(function (myJson) {
-  //     console.log(myJson);
-  //   });
-
   res.render('ejs/index');
 });
 
+// error route
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(400).send('Ya broke it!');

@@ -21,27 +21,25 @@ const views = require('../controller/views');
 |--------------------------------------------------------------------------
 */
 
-// set up routes
-// router.route('/:id/edit')
-//   // gets form to edit
-//   .get(controller.findOne, views.showForm);
-
+// set up routes for user creation and authentification
 router.route('/new')
-  // gets new form
+  // gets form for signing up
   .get(views.showForm);
+
+router.route('/login')
+  .get(views.showLogin)
+  .post(controller.login, views.handleCreateUser);
+
+
 
 router.route('/:id')
   // gets one thing
-  .get(controller.findOne, views.showOne);
-// updates one thing
-// .put(controller.update, views.handleUpdate)
+  .get(controller.findUser, views.showUser);
 // // deletes one thing
 // .delete(controller.destroy, views.handleCreateDelete);
 
 router.route('/')
-  // // gets everything
-  // .get(controller.index, views.showAll)
-  // creates one thing
+  // creates one user
   .post(controller.makeUser, views.handleCreateUser);
 
 module.exports = router;
