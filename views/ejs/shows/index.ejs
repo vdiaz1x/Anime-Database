@@ -1,17 +1,23 @@
 <% include ../partials/head %>
 
 <h1>show all the anime from query</h1>
+<a href="/show/search">search</a>
 
 <% anime.data.forEach(show => { %>
   <h1>
     <%= show.id%>
   </h1>
   <h1>
-    <%= show.attributes.titles.en_jp%>
+    <%= show.attributes.titles.en%>
   </h1>
   <img src="<%= show.attributes.posterImage.tiny%>" alt="">
 
   <a href="show/<%= show.id%>">Link to show</a>
+  <form action="user/favorites" method="post">
+    <input name="anime_id" value="<%= show.id %>" type="">
+    <input type="submit"  id="">
+  </form>
+
 <% })%>
 
 <% include ../partials/foot %>

@@ -1,7 +1,7 @@
 // storing view functions in an object for export
 const views = {};
 
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 
 // shows the ejs for all data query
@@ -51,6 +51,13 @@ views.showUser = (req, res) => {
   console.log('THIS IS USER', user);
 };
 
+views.showFavorites = (req, res) => {
+  console.log('views show fave');
+  res.send(res.locals.fave)
+  // res.render('ejs/user/profile', { user: res.locals.data });
+  // console.log('THIS IS USER', user);
+}
+
 views.incorrectLogin = (err, req, res, next) => {
   console.log('views error user');
   res.render('ejs/user/error');
@@ -67,7 +74,7 @@ views.showSearch = (req, res) => {
 };
 
 views.showAllShows = (req, res) => {
-  console.log(res.locals.anime);
+  // console.log(res.locals.anime);
   // res.json(req);
   res.render('ejs/shows/index', { anime: res.locals.anime });
   console.log({ anime: res.locals.anime });

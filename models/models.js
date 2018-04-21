@@ -81,5 +81,22 @@ models.findUserName = (id) => {
   `, id)
 }
 
+// favorites
+models.saveFavorite = (data) => {
+  console.log(data);
+
+  return db.one(`
+  INSERT INTO user_faves
+    (user_id, anime_id)
+  VALUES
+    (
+      $1,
+      $2
+    )
+  RETURNING * `, data);
+
+  console.log('models save fave');
+};
+
 // exporting models
 module.exports = models;

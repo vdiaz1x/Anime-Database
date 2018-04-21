@@ -32,4 +32,3 @@ CREATE TABLE user_faves (
 INSERT INTO users
 (fname, lname, username, password_hash)
 VALUES
-('Vinicio', 'Diaz', 'vdiaz', '$2b$11$GliuyTM8gRqmRVAgstJe..xUQlCUx/O7NfRY9MiQfHcQ4FryclEuu');

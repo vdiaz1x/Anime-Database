@@ -61,16 +61,6 @@ app.use('/route', routes);
 app.use('/user', user);
 app.use('/show', shows);
 
-// using auth router
-// app.use('/auth', authRouter)
-
-// // auth route
-// app.get('/profile', controller.login, (req, res) => {
-//   // res.render('welcome.ejs')
-//   // res.send('send')
-//   res.json(req.session);
-// });
-
 // default route
 app.get('/', (req, res) => {
   res.render('ejs/index');

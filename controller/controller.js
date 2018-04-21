@@ -33,19 +33,19 @@ controller.index = (req, res, next) => {
       console.log(err);
       res.json(err);
     });
-  console.log('controller index');
+  // console.log('controller index');
 };
 controller.make = (req, res, next) => {
-  console.log('controller make');
+  // console.log('controller make');
 };
 controller.findOne = (req, res, next) => {
-  console.log('controller findone');
+  // console.log('controller findone');
 };
 controller.update = (req, res, next) => {
-  console.log('controller update');
+  // console.log('controller update');
 };
 controller.destroy = (req, res, next) => {
-  console.log('controller destroy');
+  // console.log('controller destroy');
 };
 
 // users
@@ -88,7 +88,7 @@ controller.login = async (req, res, next) => {
   try {
     // grabs username and password from request
     const { username, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     // finds the user info from model
     const user = await models.findUserName(username);
 
@@ -101,9 +101,12 @@ controller.login = async (req, res, next) => {
     if (!valid) {
       throw { message: 'wrong password' };
     }
+    // saving the login data for user into locals
     res.locals.data = user;
     // saving the session with user data
     req.session.user = user;
+    console.log(req.session);
+
     next();
   }
   // catches error
@@ -115,12 +118,22 @@ controller.login = async (req, res, next) => {
   console.log('controller login');
 };
 
+controller.logout = (req, res, next) => {
+  // destroys session
+  req.session.destroy(err => next(err));
+};
+
 // shows
 controller.search = (req, res, next) => {
+  // grabbing the search parameter for the actual query
+  // const parameter = req.body.parameter;
+  const parameter = 'genres';
+
   // grabbing the query parameter from the req.body (from the search form)
-  const anime_query = req.body.query;
+  const query = req.body.query;
+
   // fetch call for API w/ dynamic variable
-  fetch(`https://kitsu.io/api/edge/anime?filter%5Bgenres%5D=${anime_query}`)
+  fetch(`https://kitsu.io/api/edge/anime?sort=popularityRank&page%5Blimit%5D=20&filter%5B${parameter}%5D=${query}`)
     .then(res => res.json())
     .then((json) => {
       res.locals.anime = json;
@@ -131,10 +144,10 @@ controller.search = (req, res, next) => {
     });
 };
 
-controller.indexShows = (req, res, next) => {
-  console.log(req.body);
-  next();
-};
+// controller.indexShows = (req, res, next) => {
+//   console.log(req.body);
+//   next();
+// };
 
 controller.findOneShow = (req, res, next) => {
   const anime_id = req.params.id;
@@ -147,6 +160,25 @@ controller.findOneShow = (req, res, next) => {
     })
     .catch((err) => {
       // console.log(err);
+      res.json(err);
+    });
+};
+
+controller.makeFavorite = (req, res, next) => {
+  console.log(req.session.user.id);
+  console.log(req.body.anime_id);
+
+
+  models.saveFavorite([req.session.user.id, req.body.anime_id])
+    .then((data) => {
+      res.locals.fave = data;
+      console.log(data);
+
+      console.log('inside fave', data);
+      next();
+    })
+    .catch((err) => {
+      console.log('fave error', err);
       res.json(err);
     });
 };

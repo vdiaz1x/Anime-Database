@@ -39,6 +39,9 @@ router.route('/:id')
 // // deletes one thing
 // .delete(controller.destroy, views.handleCreateDelete);
 
+router.route('/favorites')
+  .post(controller.makeFavorite, views.showFavorites)
+
 router.route('/')
   // creates one user
   .post(controller.makeUser, views.handleCreateUser);

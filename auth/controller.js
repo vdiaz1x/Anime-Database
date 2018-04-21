@@ -6,7 +6,7 @@ module.exports = {
 
     try {
       const { username, password } = req.body;
-      const.user = await models.findUserId(username);
+      const user = await models.findUserId(username);
       const valid = await bcrypt.compare(password, user.password_hash);
 
       if (!valid) {
