@@ -33,14 +33,16 @@ router.route('/profile')
   .get(controller.findUser, views.showUser, views.incorrectLogin)
   .post(controller.login, views.showUser, views.incorrectLogin);
 
-router.route('/:id')
-  // gets one thing
-  .get(controller.findUser, views.showUser, views.incorrectLogin);
+// router.route('/:id')
+//   // gets one thing
+//   .get(controller.findUser, views.showUser, views.incorrectLogin);
 // // deletes one thing
 // .delete(controller.destroy, views.handleCreateDelete);
 
 router.route('/favorites')
-  .post(controller.makeFavorite, views.showFavorites)
+  .get(controller.showFavorite, views.showFavorite)
+  // favorites one show
+  .post(controller.makeFavorite, views.showFavorite);
 
 router.route('/')
   // creates one user

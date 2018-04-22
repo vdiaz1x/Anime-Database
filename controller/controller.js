@@ -180,12 +180,9 @@ controller.findOneShow = (req, res, next) => {
 controller.makeFavorite = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
     console.log('nooooo');
-}
-
+  }
   // console.log(req.session.user.id);
   // console.log(req.body.anime_id);
-
-
   models.saveFavorite([req.session.user.id, req.body.anime_id])
     .then((data) => {
       res.locals.fave = data;
@@ -196,6 +193,26 @@ controller.makeFavorite = (req, res, next) => {
     })
     .catch((err) => {
       console.log('fave error', err);
+      res.json(err);
+    });
+};
+
+controller.showFavorite = (req, res, next) => {
+  if (req.session) { console.log(req.session); } else {
+    console.log('nooooo');
+  }
+  // console.log(req.session.user.id);
+  // console.log(req.body.anime_id);
+  models.findFavorite(req.session.user.id)
+    .then((data) => {
+      res.locals.fave = data;
+      console.log(data);
+
+      console.log('inside fave find', data);
+      next();
+    })
+    .catch((err) => {
+      console.log('fave find error', err);
       res.json(err);
     });
 };

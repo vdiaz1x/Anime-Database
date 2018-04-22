@@ -46,17 +46,19 @@ views.handleCreateUser = (req, res) => {
 };
 
 views.showUser = (req, res) => {
-  console.log('views show user');
-  res.render('ejs/user/profile', { user: res.locals.data });
-  console.log('THIS IS USER', user);
+  // console.log('views show user');
+
+
+  res.render('ejs/user/profile', { user: req.session.user });
+  // console.log('THIS IS USER', user);
 };
 
-views.showFavorites = (req, res) => {
+views.showFavorite = (req, res) => {
   console.log('views show fave');
-  res.send(res.locals.fave)
+  res.send(res.locals.fave);
   // res.render('ejs/user/profile', { user: res.locals.data });
   // console.log('THIS IS USER', user);
-}
+};
 
 views.incorrectLogin = (err, req, res, next) => {
   console.log('views error user');
@@ -87,3 +89,4 @@ views.showOneShow = (req, res) => {
 };
 
 module.exports = views;
+//

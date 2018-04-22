@@ -98,5 +98,14 @@ models.saveFavorite = (data) => {
   console.log('models save fave');
 };
 
+models.findFavorite = (id) => {
+  console.log('IIIIIIIIIIIIIDDDDDDDDDDDDDD',id)
+  return db.many(`
+  SELECT user_faves.anime_id, users.id AS user
+  FROM user_faves
+  JOIN users ON user_faves.user_id = users.id
+  WHERE user_faves.user_id = $1
+  `, id)
+}
 // exporting models
 module.exports = models;
