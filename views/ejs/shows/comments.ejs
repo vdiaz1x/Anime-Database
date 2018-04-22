@@ -1,6 +1,7 @@
 <% include ../partials/head %>
 
 <h1>show comments</h1>
+<h1><%= comments[0].anime_title %></h1>
   <% comments.forEach( comment => { %>
     <h2><%= comment.anime_id %></h2>
     <h2><%= comment.comment %></h2>

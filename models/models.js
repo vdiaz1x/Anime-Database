@@ -132,9 +132,10 @@ models.saveComment = (data) => {
 
 models.findComment = (data) => {
   return db.many(`
-  SELECT *
+  SELECT comments.*, user_faves.anime_title
   FROM comments
-  WHERE user_id = $1 AND anime_id = $2
+  JOIN user_faves ON user_faves.anime_id = comments.anime_id
+  WHERE comments.user_id = $1 AND comments.anime_id = $2
   `, data);
 };
 
