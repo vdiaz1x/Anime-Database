@@ -1,3 +1,9 @@
+/*
+|--------------------------------------------------------------------------
+| Imports
+|--------------------------------------------------------------------------
+*/
+
 // import express
 const express = require('express');
 
@@ -10,8 +16,17 @@ const controller = require('../controller/controller');
 // set up views
 const views = require('../controller/views');
 
-// // set up routes for search and display shows
+/*
+|--------------------------------------------------------------------------
+| Routes
+|--------------------------------------------------------------------------
+*/
+// set up route for comments
+// router.route('/:id/comment')
+//   .get(views.showComment)
+//   .post(controller.makeComment, views.showComment);
 
+// // set up routes for search and display shows
 router.route('/search')
   // shows the form for the anime request
   .get(views.showSearch);

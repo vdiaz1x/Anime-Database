@@ -1,6 +1,9 @@
 <% include ../partials/head %>
 
   <h1>user favorites</h1>
-
+  <% favorites.forEach(fave => { %>
+    <h1><%= fave.anime_id %></h1>
+    <a href="/show/<%= fave.anime_id %>/comment">comment</a>
+  <% }) %>
 
 <% include ../partials/foot %>

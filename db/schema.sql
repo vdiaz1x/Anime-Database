@@ -13,6 +13,7 @@ CREATE DATABASE anime_db_dev;
 -- drop tables if they exist
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS user_faves CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
 
 --create table for users
 CREATE TABLE users (
@@ -26,7 +27,17 @@ CREATE TABLE users (
 -- create table for user favorites
 CREATE TABLE user_faves (
   user_id         INT REFERENCES users(id) NOT NULL,
-  anime_id        INT NOT NULL
+  anime_id        INT NOT NULL,
+  anime_title     TEXT,
+  anime_image     TEXT
+);
+
+-- create table for comments
+CREATE TABLE comments (
+  id              SERIAL PRIMARY KEY NOT NULL,
+  user_id         INT REFERENCES users(id) NOT NULL,
+  anime_id        INT NOT NULL,
+  comment         TEXT
 );
 
 -- inserting sample user for testing

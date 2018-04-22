@@ -1,8 +1,12 @@
+
+/*
+|--------------------------------------------------------------------------
+| Views
+|--------------------------------------------------------------------------
+*/
+
 // storing view functions in an object for export
 const views = {};
-
-// const fetch = require('node-fetch');
-
 
 // shows the ejs for all data query
 views.showAll = (req, res) => {
@@ -26,8 +30,12 @@ views.handleUpdate = (req, res) => {
   // res.redirect('hello');
 };
 
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
 // users
-
 // shows the ejs for the form
 views.showForm = (req, res) => {
   console.log('views showform');
@@ -47,15 +55,14 @@ views.handleCreateUser = (req, res) => {
 
 views.showUser = (req, res) => {
   // console.log('views show user');
-
-
   res.render('ejs/user/profile', { user: req.session.user });
   // console.log('THIS IS USER', user);
 };
 
 views.showFavorite = (req, res) => {
   console.log('views show fave');
-  res.send(res.locals.fave);
+  // res.send(res.locals.fave);
+  res.render('ejs/user/favorites', { favorites: res.locals.fave });
   // res.render('ejs/user/profile', { user: res.locals.data });
   // console.log('THIS IS USER', user);
 };
@@ -68,6 +75,12 @@ views.incorrectLogin = (err, req, res, next) => {
 //   console.log('views handlelogin');
 //   res.redirect('user/user');
 // };
+
+/*
+|--------------------------------------------------------------------------
+| Shows
+|--------------------------------------------------------------------------
+*/
 
 // shows
 views.showSearch = (req, res) => {

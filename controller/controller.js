@@ -48,6 +48,12 @@ controller.destroy = (req, res, next) => {
   // console.log('controller destroy');
 };
 
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
+
 // users
 controller.findUser = (req, res, next) => {
   models.findUserId(req.session.user.id)
@@ -64,10 +70,12 @@ controller.findUser = (req, res, next) => {
   console.log('controller find');
 };
 
+// saves a user (hashes password before model)
 controller.makeUser = async (req, res, next) => {
+  // this hashes the password from the req.body and saves it back in the same place
   req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
-  // console.log('outside', req.body);
 
+  //model used to save body, req.body contains new user info
   models.saveUser(req.body)
     .then((data) => {
       res.locals.data = data;
@@ -131,6 +139,12 @@ controller.loginRequired = [
   (err, req, res, next) => res.sendStatus(401),
 ];
 
+/*
+|--------------------------------------------------------------------------
+| Shows
+|--------------------------------------------------------------------------
+*/
+
 // shows
 controller.search = (req, res, next) => {
   if (req.session) { console.log(req.session); }else { console.log('nooooo'); }
@@ -152,11 +166,6 @@ controller.search = (req, res, next) => {
       res.json(err);
     });
 };
-
-// controller.indexShows = (req, res, next) => {
-//   console.log(req.body);
-//   next();
-// };
 
 controller.findOneShow = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
@@ -201,8 +210,6 @@ controller.showFavorite = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
     console.log('nooooo');
   }
-  // console.log(req.session.user.id);
-  // console.log(req.body.anime_id);
   models.findFavorite(req.session.user.id)
     .then((data) => {
       res.locals.fave = data;

@@ -1,3 +1,8 @@
+/*
+|--------------------------------------------------------------------------
+| Imports
+|--------------------------------------------------------------------------
+*/
 // import pg promise
 const pgp = require('pg-promise')();
 
@@ -11,17 +16,6 @@ const db = pgp(config);
 const models = {};
 
 // models for main route
-
-// what do we need the models for?
-// create users (/user/new)
-// delete users (/users)
-// create comments (/users/comments)
-// update comments (users/comments)
-// delete comments (users/comments)
-// get query of shows (/anime)
-// get one show (anime/id)
-// show user list of shows (users/shows)
-
 
 // gets all table data
 models.findAll = () => {
@@ -48,6 +42,11 @@ models.deleteById = (id) => {
   console.log('models deleteid');
 };
 
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
 // user
 models.saveUser = (data) => {
   return db.one(`
@@ -65,21 +64,17 @@ models.saveUser = (data) => {
   console.log('models saveone');
 };
 
-models.findUserId = (id) => {
-  return db.one(`
+models.findUserId = (id) => db.one(`
   SELECT *
   FROM users
   WHERE id = $1
-  `, id)
-}
+  `, id);
 
-models.findUserName = (id) => {
-  return db.one(`
+models.findUserName = (id) => db.one(`
   SELECT username, password_hash, id
   FROM users
   WHERE username = $1
-  `, id)
-}
+  `, id);
 
 // favorites
 models.saveFavorite = (data) => {
@@ -98,14 +93,54 @@ models.saveFavorite = (data) => {
   console.log('models save fave');
 };
 
-models.findFavorite = (id) => {
-  console.log('IIIIIIIIIIIIIDDDDDDDDDDDDDD',id)
-  return db.many(`
+models.findFavorite = (id) => db.many(`
   SELECT user_faves.anime_id, users.id AS user
   FROM user_faves
   JOIN users ON user_faves.user_id = users.id
   WHERE user_faves.user_id = $1
-  `, id)
-}
+  `, id);
+
+/*
+|--------------------------------------------------------------------------
+| Comments
+|--------------------------------------------------------------------------
+*/
+
+models.makeComment = (data) => {
+  return db.one(`
+  INSERT INTO comments
+    (user_id, anime_id, comment)
+  VALUES
+    (
+      $/user_id/,
+      $/anime_id/,
+      $/comment/
+    )
+  RETURNING * `, data);
+
+  console.log('models save comment');
+};
+
+models.findComment = (id) => db.one(`
+  SELECT *
+  FROM comments
+  WHERE id = $1
+  `, id);
+
+models.updateComment = (id, data) => db.one(`
+    UPDATE comments SET
+        user_id =	$/data.user_id/,
+        anime_id =	$/data.anime_id/,
+        comment = $/data.comment/,
+    WHERE id = $/id/
+    RETURNING *
+    `, { id, data });
+
+models.deleteComment = (id) => db.none(`
+  DELETE
+  FROM comments
+  WHERE id = $1
+  `, id);
+
 // exporting models
 module.exports = models;
