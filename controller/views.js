@@ -35,6 +35,7 @@ views.handleUpdate = (req, res) => {
 | Users
 |--------------------------------------------------------------------------
 */
+
 // users
 // shows the ejs for the form
 views.showForm = (req, res) => {
@@ -56,14 +57,6 @@ views.handleCreateUser = (req, res) => {
 views.showUser = (req, res) => {
   // console.log('views show user');
   res.render('ejs/user/profile', { user: req.session.user });
-  // console.log('THIS IS USER', user);
-};
-
-views.showFavorite = (req, res) => {
-  console.log('views show fave');
-  // res.send(res.locals.fave);
-  res.render('ejs/user/favorites', { favorites: res.locals.fave });
-  // res.render('ejs/user/profile', { user: res.locals.data });
   // console.log('THIS IS USER', user);
 };
 
@@ -99,6 +92,39 @@ views.showOneShow = (req, res) => {
   console.log(res.locals.anime_one);
   // res.json(req);
   res.render('ejs/shows/show', { anime: res.locals.anime_one });
+};
+
+/*
+|--------------------------------------------------------------------------
+| Favorites
+|--------------------------------------------------------------------------
+*/
+
+views.showFavorite = (req, res) => {
+  console.log('views show fave');
+  // res.send(res.locals.fave);
+  res.render('ejs/user/favorites', { favorites: res.locals.fave });
+  // res.render('ejs/user/profile', { user: res.locals.data });
+  // console.log('THIS IS USER', user);
+};
+
+/*
+|--------------------------------------------------------------------------
+| Comments
+|--------------------------------------------------------------------------
+*/
+
+views.showComment = (req, res) => {
+  console.log(res.locals.comment);
+  res.json(res.locals.comment);
+  // res.render('ejs/shows/index', { comment: res.locals.comment });
+  // console.log({ comment: res.locals.comment });
+};
+
+views.showOneComment = (req, res) => {
+  console.log(res.locals.comment_one);
+  res.json(res.locals.comment_one);
+  // res.render('ejs/shows/show', { comment_one: res.locals.comment_one });
 };
 
 module.exports = views;

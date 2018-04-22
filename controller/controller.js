@@ -75,7 +75,7 @@ controller.makeUser = async (req, res, next) => {
   // this hashes the password from the req.body and saves it back in the same place
   req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
 
-  //model used to save body, req.body contains new user info
+  // model used to save body, req.body contains new user info
   models.saveUser(req.body)
     .then((data) => {
       res.locals.data = data;
@@ -131,8 +131,7 @@ controller.logout = (req, res, next) => {
   req.session.destroy(err => next(err));
 };
 
-
-//what does this do???
+// what does this do???
 controller.loginRequired = [
   /* this is either going to resolve to next(false) or next(null) */
   (req, res, next) => next(!req.session.user || null),
@@ -147,7 +146,7 @@ controller.loginRequired = [
 
 // shows
 controller.search = (req, res, next) => {
-  if (req.session) { console.log(req.session); }else { console.log('nooooo'); }
+  if (req.session) { console.log(req.session); } else { console.log('nooooo'); }
   // grabbing the search parameter for the actual query
   // const parameter = req.body.parameter;
   const parameter = 'genres';
@@ -170,7 +169,7 @@ controller.search = (req, res, next) => {
 controller.findOneShow = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
     console.log('nooooo');
- }
+  }
 
   const anime_id = req.params.id;
   fetch(`https://kitsu.io/api/edge/anime/${anime_id}`)
@@ -185,6 +184,12 @@ controller.findOneShow = (req, res, next) => {
       res.json(err);
     });
 };
+
+/*
+|--------------------------------------------------------------------------
+| Favorites
+|--------------------------------------------------------------------------
+*/
 
 controller.makeFavorite = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
@@ -223,5 +228,53 @@ controller.showFavorite = (req, res, next) => {
       res.json(err);
     });
 };
+
+/*
+|--------------------------------------------------------------------------
+| Comments
+|--------------------------------------------------------------------------
+*/
+
+controller.makeComment = (req, res, next) => {
+  if (req.session) { console.log(req.session); } else {
+    console.log('nooooo');
+  }
+  // console.log(req.session.user.id);
+  // console.log(req.body.anime_id);
+  models.saveCoomment([req.session.user.id, req.body])
+    .then((data) => {
+      res.locals.comment = data;
+      console.log(data);
+
+      console.log('inside comment', data);
+      next();
+    })
+    .catch((err) => {
+      console.log('comment error', err);
+      res.json(err);
+    });
+};;
+
+controller.showComment(req, res, next) => {
+  if (req.session) { console.log(req.session); } else {
+    console.log('nooooo');
+  }
+  models.findComment(req.session.user.id)
+    .then((data) => {
+      res.locals.fave = data;
+      console.log(data);
+
+      console.log('inside fave find', data);
+      next();
+    })
+    .catch((err) => {
+      console.log('fave find error', err);
+      res.json(err);
+    });
+};;
+
+controller.updateComment;
+
+controller.deleteComment;
 
 module.exports = controller;

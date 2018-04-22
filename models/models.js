@@ -64,17 +64,27 @@ models.saveUser = (data) => {
   console.log('models saveone');
 };
 
-models.findUserId = (id) => db.one(`
+models.findUserId = (id) => {
+  return db.one(`
   SELECT *
   FROM users
   WHERE id = $1
-  `, id);
+  `, id)
+}
 
-models.findUserName = (id) => db.one(`
+models.findUserName = (id) => {
+  return db.one(`
   SELECT username, password_hash, id
   FROM users
   WHERE username = $1
-  `, id);
+  `, id)
+}
+
+/*
+|--------------------------------------------------------------------------
+| Favorites
+|--------------------------------------------------------------------------
+*/
 
 // favorites
 models.saveFavorite = (data) => {
@@ -93,12 +103,14 @@ models.saveFavorite = (data) => {
   console.log('models save fave');
 };
 
-models.findFavorite = (id) => db.many(`
+models.findFavorite = (id) => {
+  return db.many(`
   SELECT user_faves.anime_id, users.id AS user
   FROM user_faves
   JOIN users ON user_faves.user_id = users.id
   WHERE user_faves.user_id = $1
-  `, id);
+  `, id)
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +118,7 @@ models.findFavorite = (id) => db.many(`
 |--------------------------------------------------------------------------
 */
 
-models.makeComment = (data) => {
+models.saveComment = (data) => {
   return db.one(`
   INSERT INTO comments
     (user_id, anime_id, comment)
@@ -119,28 +131,34 @@ models.makeComment = (data) => {
   RETURNING * `, data);
 
   console.log('models save comment');
-};
+};;
 
-models.findComment = (id) => db.one(`
+models.findComment = (id) => {
+  return db.one(`
   SELECT *
   FROM comments
   WHERE id = $1
-  `, id);
+  `, id)
+};
 
-models.updateComment = (id, data) => db.one(`
+models.updateComment = (id, data) => {
+  return db.one(`
     UPDATE comments SET
         user_id =	$/data.user_id/,
         anime_id =	$/data.anime_id/,
         comment = $/data.comment/,
     WHERE id = $/id/
     RETURNING *
-    `, { id, data });
+    `, { id, data })
+};
 
-models.deleteComment = (id) => db.none(`
+models.deleteComment = (id) => {
+  return db.none(`
   DELETE
   FROM comments
   WHERE id = $1
-  `, id);
+  `, id)
+};
 
 // exporting models
 module.exports = models;

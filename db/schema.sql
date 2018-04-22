@@ -45,3 +45,15 @@ INSERT INTO users
 (fname, lname, username, password_hash)
 VALUES
 ('Vinicio', 'Diaz', 'vdiaz', '$2b$11$GliuyTM8gRqmRVAgstJe..xUQlCUx/O7NfRY9MiQfHcQ4FryclEuu');
+
+-- inserting sample user for testings
+INSERT INTO user_faves
+(user_id, anime_id, anime_title, anime_image)
+VALUES
+(1, 1415, 'Code Geass: Lelouch of the Rebellion', 'https://media.kitsu.io/anime/poster_images/1415/large.jpg?1408443967');
+
+-- inserting sample comment for testing
+INSERT INTO comments
+(user_id, anime_id, comment)
+VALUES
+(1, 1415, '10/10 GOAT');
