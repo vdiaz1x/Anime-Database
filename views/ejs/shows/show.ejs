@@ -1,8 +1,31 @@
 <% include ../partials/head %>
 
 <h1>show one anime from query</h1>
-<h1><%= anime.data.id%></h1>
-<h1><%= anime.data.attributes.titles.en_jp%></h1>
+<h1><%= %></h1>
 <img src="<%= anime.data.attributes.posterImage.tiny%>" alt="">
+
+<div class="anime_show_container">
+  <div class="anime_show_section">
+    <h2><%= anime.data.attributes.titles.en %></h2>
+    <h4><%= anime.data.attributes.titles.en_jp %></h4>
+    <h4><%= anime.data.attributes.titles.ja_jp %></h4>
+    <div class="anime_dossier">
+      <div class="anime_info">Start Date: <%= anime.data.attributes.startDate %></div>
+      <div class="anime_info">End Date: <%= anime.data.attributes.endDate %></div>
+      <div class="anime_info">Episode Count: <%= anime.data.attributes.episodeCount %> episodes</div>
+      <div class="anime_info">Episode Length: <%= anime.data.attributes.episodeLength %> minutes</div>
+      <div class="anime_info">Original Airing: <%= anime.data.attributes.showType %></div>
+      <div class="anime_info">Airing Status: <%= anime.data.attributes.status %></div>
+      <div class="anime_rating">Age Rating: <%= anime.data.attributes.ageRating %> <%= anime.data.attributes.ageRatingGuide %></div>
+    </div>
+  </div>
+  <div class="anime_show_section">
+    <h4>Synopsis</h4>
+    <p><%= anime.data.attributes.synopsis %></p>
+  </div>
+  <div class="anime_show_section">
+    <img src="<%= anime.data.attributes.posterImage.medium %>" alt="">
+  </div>
+</div>
 
 <% include ../partials/foot %>

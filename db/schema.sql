@@ -29,6 +29,7 @@ CREATE TABLE user_faves (
   anime_id        INT NOT NULL
 );
 
+-- inserting sample user for testing
 INSERT INTO users
 (fname, lname, username, password_hash)
 VALUES

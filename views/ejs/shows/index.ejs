@@ -1,23 +1,24 @@
 <% include ../partials/head %>
 
-<h1>show all the anime from query</h1>
-<a href="/show/search">search</a>
+<h1>Search Query Results</h1>
 
-<% anime.data.forEach(show => { %>
-  <h1>
-    <%= show.id%>
-  </h1>
-  <h1>
-    <%= show.attributes.titles.en%>
-  </h1>
-  <img src="<%= show.attributes.posterImage.tiny%>" alt="">
-
-  <a href="show/<%= show.id%>">Link to show</a>
-  <form action="user/favorites" method="post">
-    <input name="anime_id" value="<%= show.id %>" type="">
-    <input type="submit"  id="">
-  </form>
-
-<% })%>
+<div class="anime_container_search">
+  <% anime.data.forEach(show => { %>
+    <div class="anime_search">
+      <div class="anime_en_title"><%= show.attributes.titles.en %></div>
+      <div class="anime_jp_title"><%= show.attributes.titles.ja_jp %></div>
+      <div class="anime_image_search"><img src="<%= show.attributes.posterImage.medium%>" alt=""></div>
+      <div class="anime_description"><%= show.attributes.synopsis %></div>
+      <div class="anime_footer">
+        <a class="anime_link_search" href="show/<%= show.id%>">Link to show</a>
+        <form action="user/favorites" method="post" class="anime_form_fave" >
+          <input name="anime_id" value="<%= show.id %>" type="hidden">
+          <input type="submit"  id="">
+        </form>
+      </div>
+    </div>
+  <% })%>
+</div>
 
 <% include ../partials/foot %>
+
