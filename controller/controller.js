@@ -241,17 +241,17 @@ controller.showFavorite = (req, res, next) => {
 */
 
 controller.makeComment = (req, res, next) => {
-  if (req.session) { console.log(req.session); } else {
-    console.log('nooooo');
+  if (req.session.user) { console.log(req.session.user); } else {
+    console.log('no user');
   }
   // console.log(req.session.user.id);
   // console.log(req.body.anime_id);
-  models.saveCoomment([req.session.user.id, req.body])
+  models.saveComment([req.session.user.id, req.body.anime_id, req.body.comment])
     .then((data) => {
       res.locals.comment = data;
-      console.log(data);
+      // console.log(data);
 
-      console.log('inside comment', data);
+      console.log('inside comment make', data);
       next();
     })
     .catch((err) => {
@@ -261,16 +261,16 @@ controller.makeComment = (req, res, next) => {
 };
 
 controller.showComment = (req, res, next) => {
-  if (req.session) { console.log(req.session); } else {
-    console.log('nooooo');
+  if (req.session.user) { console.log(req.session.user); } else {
+    console.log('no user');
   }
-  console.log(req.params.id);
-  console.log(req.session.user.id);
+  // console.log(req.params.id);
+  // console.log(req.session.user.id);
 
   models.findComment([req.session.user.id, req.params.id])
     .then((data) => {
       res.locals.comment = data;
-      console.log('controller', data);
+      // console.log('controller', data);
 
       console.log('inside comment find', data);
       next();

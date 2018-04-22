@@ -123,9 +123,9 @@ models.saveComment = (data) => {
     (user_id, anime_id, comment)
   VALUES
     (
-      $/user_id/,
-      $/anime_id/,
-      $/comment/
+      $1,
+      $2,
+      $3
     )
   RETURNING * `, data);
 };

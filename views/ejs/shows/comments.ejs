@@ -6,10 +6,10 @@
     <h2><%= comment.comment %></h2>
   <% }) %>
 
-<form action="/<%= comment.anime_id %>/comment" method="post">
-  <textarea name="comment" rows="10" cols="10"></textarea>
-  <input type="hidden" name="anime_id" value="<%= comment.anime_id %>">
-  <input type="hidden" name="user_id" value="<%= comment.user_id %>">
+<form action="/show/<%= comments[0].anime_id %>/comment" method="post">
+  <textarea name="comment" rows="10" cols="100"></textarea>
+  <input type="hidden" name="anime_id" value="<%= comments[0].anime_id %>">
+  <input type="hidden" name="user_id" value="<%= comments[0].user_id %>">
   <input type="submit">
 </form>
 
