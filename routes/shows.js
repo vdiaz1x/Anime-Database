@@ -22,10 +22,9 @@ const views = require('../controller/views');
 |--------------------------------------------------------------------------
 */
 // set up route for comments
-// router.route('/:id/comment')
-//   .get(views.showComment)
-//   .post(controller.makeComment, views.showComment);
-route.routes('/:id/comment')
+router.route('/:id/comment')
+  .get(controller.showComment, views.showComment)
+  .post(controller.makeComment, views.showComment);
 
 // // set up routes for search and display shows
 router.route('/search')

@@ -23,30 +23,30 @@ const controller = {};
 */
 
 // takes the info from the models and passes it to the views
-controller.index = (req, res, next) => {
-  models.findAll()
-    .then((data) => {
-      res.locals.data = data;
-      next();
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
-  // console.log('controller index');
-};
-controller.make = (req, res, next) => {
-  // console.log('controller make');
-};
-controller.findOne = (req, res, next) => {
-  // console.log('controller findone');
-};
-controller.update = (req, res, next) => {
-  // console.log('controller update');
-};
-controller.destroy = (req, res, next) => {
-  // console.log('controller destroy');
-};
+// controller.index = (req, res, next) => {
+//   models.findAll()
+//     .then((data) => {
+//       res.locals.data = data;
+//       next();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.json(err);
+//     });
+//   // console.log('controller index');
+// };
+// controller.make = (req, res, next) => {
+//   // console.log('controller make');
+// };
+// controller.findOne = (req, res, next) => {
+//   // console.log('controller findone');
+// };
+// controller.update = (req, res, next) => {
+//   // console.log('controller update');
+// };
+// controller.destroy = (req, res, next) => {
+//   // console.log('controller destroy');
+// };
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,8 @@ controller.destroy = (req, res, next) => {
 
 // users
 controller.findUser = (req, res, next) => {
+  console.log('find user');
+
   models.findUserId(req.session.user.id)
     .then((data) => {
       res.locals.user = data;
@@ -117,6 +119,7 @@ controller.login = async (req, res, next) => {
 
     next();
   }
+
   // catches error
   catch (err) {
     console.log('THIS IS THE ERROR', err);
@@ -192,15 +195,15 @@ controller.findOneShow = (req, res, next) => {
 */
 
 controller.makeFavorite = (req, res, next) => {
-  if (req.session) { console.log(req.session); } else {
-    console.log('nooooo');
-  }
+  // if (req.session) { console.log(req.session); } else {
+  //   console.log('nooooo');
+  // }
   // console.log(req.session.user.id);
   // console.log(req.body.anime_id);
-  models.saveFavorite([req.session.user.id, req.body.anime_id])
+  models.saveFavorite([req.session.user.id, req.body.anime_id, req.body.anime_title, req.body.anime_image])
     .then((data) => {
       res.locals.fave = data;
-      console.log(data);
+      // console.log(data);
 
       console.log('inside fave', data);
       next();
@@ -212,15 +215,17 @@ controller.makeFavorite = (req, res, next) => {
 };
 
 controller.showFavorite = (req, res, next) => {
-  if (req.session) { console.log(req.session); } else {
-    console.log('nooooo');
-  }
+  // if (req.session) { console.log(req.session); } else {
+  //   console.log('nooooo');
+  // }
+  console.log('show all favorites');
+
   models.findFavorite(req.session.user.id)
     .then((data) => {
       res.locals.fave = data;
-      console.log(data);
+      // console.log(data);
 
-      console.log('inside fave find', data);
+      // console.log('inside fave find', data);
       next();
     })
     .catch((err) => {
@@ -253,25 +258,28 @@ controller.makeComment = (req, res, next) => {
       console.log('comment error', err);
       res.json(err);
     });
-};;
+};
 
-controller.showComment(req, res, next) => {
+controller.showComment = (req, res, next) => {
   if (req.session) { console.log(req.session); } else {
     console.log('nooooo');
   }
-  models.findComment(req.session.user.id)
-    .then((data) => {
-      res.locals.fave = data;
-      console.log(data);
+  console.log(req.params.id);
+  console.log(req.session.user.id);
 
-      console.log('inside fave find', data);
+  models.findComment([req.session.user.id, req.params.id])
+    .then((data) => {
+      res.locals.comment = data;
+      console.log('controller', data);
+
+      console.log('inside comment find', data);
       next();
     })
     .catch((err) => {
-      console.log('fave find error', err);
+      console.log('fave comment error', err);
       res.json(err);
     });
-};;
+};
 
 controller.updateComment;
 

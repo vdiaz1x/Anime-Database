@@ -30,12 +30,12 @@ router.route('/login')
   .get(views.showLogin);
 
 router.route('/profile')
-  .get(controller.findUser, views.showUser, views.incorrectLogin)
+  // .get(controller.findUser, views.showUser, views.incorrectLogin)
   .post(controller.login, views.showUser, views.incorrectLogin);
 
-router.route('/:id')
-  // gets one thing
-  .get(controller.findUser, views.showUser, views.incorrectLogin);
+router.route('/:id');
+// gets one thing
+// .get(controller.findUser, views.showUser, views.incorrectLogin);
 // // deletes one thing
 // .delete(controller.destroy, views.handleCreateDelete);
 

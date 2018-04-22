@@ -12,7 +12,7 @@ const session = require('express-session');
 // const authRouter = require('./auth/router');
 
 // setting up the routers
-const routes = require('./routes/routes');
+// const routes = require('./routes/routes');
 const user = require('./routes/user');
 const shows = require('./routes/shows');
 
@@ -57,7 +57,7 @@ app.listen(port, () => console.log(`Listening on port: ${port} in ${app.get('env
   .on('error', console.error);
 
 // using router
-app.use('/route', routes);
+// app.use('/route', routes);
 app.use('/user', user);
 app.use('/show', shows);
 

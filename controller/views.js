@@ -102,10 +102,8 @@ views.showOneShow = (req, res) => {
 
 views.showFavorite = (req, res) => {
   console.log('views show fave');
-  // res.send(res.locals.fave);
+  console.log(res.locals.anime);
   res.render('ejs/user/favorites', { favorites: res.locals.fave });
-  // res.render('ejs/user/profile', { user: res.locals.data });
-  // console.log('THIS IS USER', user);
 };
 
 /*
@@ -116,8 +114,8 @@ views.showFavorite = (req, res) => {
 
 views.showComment = (req, res) => {
   console.log(res.locals.comment);
-  res.json(res.locals.comment);
-  // res.render('ejs/shows/index', { comment: res.locals.comment });
+  // res.json(res.locals.comment);
+  res.render('ejs/shows/comments', { comments: res.locals.comment });
   // console.log({ comment: res.locals.comment });
 };
 

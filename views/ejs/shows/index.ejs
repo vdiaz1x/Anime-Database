@@ -13,6 +13,8 @@
         <a class="anime_link_search" href="show/<%= show.id%>">Link to show</a>
         <form action="user/favorites" method="post" class="anime_form_fave" >
           <input name="anime_id" value="<%= show.id %>" type="hidden">
+          <input name="anime_title" value="<%= show.attributes.titles.en %>" type="hidden">
+          <input name="anime_image" value="<%= show.attributes.posterImage.large %>" type="hidden">
           <input type="submit"  id="">
         </form>
       </div>
