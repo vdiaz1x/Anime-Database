@@ -4,9 +4,6 @@
 |--------------------------------------------------------------------------
 */
 
-// require the .env
-require('dotenv').config();
-
 // require all modules (dependencies)
 const express = require('express');
 const logger = require('morgan');
@@ -19,7 +16,7 @@ const session = require('express-session');
 const user = require('./routes/user');
 const shows = require('./routes/shows');
 
-// require.env config
+// require .env config
 require('dotenv').config();
 
 /*

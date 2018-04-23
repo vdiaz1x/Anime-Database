@@ -36,7 +36,7 @@ models.saveUser = (data) => {
   RETURNING * `, data);
 };
 
-//finds user by id to display in profile
+// finds user by id to display in profile
 // delete this function? seems to be obsolete
 models.findUserId = (id) => {
   return db.one(`
