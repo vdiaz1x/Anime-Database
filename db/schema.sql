@@ -8,7 +8,8 @@ DROP DATABASE IF EXISTS anime_db_dev;
 CREATE DATABASE anime_db_dev;
 
 -- go into database
-\c anime_db_dev
+-- commented out for heroku
+-- \c anime_db_dev
 
 -- drop tables if they exist
 DROP TABLE IF EXISTS users CASCADE;

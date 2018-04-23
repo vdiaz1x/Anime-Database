@@ -111,11 +111,12 @@ models.saveComment = (data) => {
 
 // finds all comments for a specific anime by anime id to display in comment list
 models.findComment = (data) => {
-  return db.many(`
+  return db.any(`
   SELECT comments.*, user_faves.anime_title
   FROM comments
   JOIN user_faves ON user_faves.anime_id = comments.anime_id
   WHERE comments.user_id = $1 AND comments.anime_id = $2
+  ORDER BY comments.id
   `, data);
 };
 

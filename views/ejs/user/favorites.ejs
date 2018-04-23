@@ -1,12 +1,16 @@
 <% include ../partials/head %>
 
-  <h1>user favorites</h1>
+  <h1>My Favorite Anime</h1>
   <% favorites.forEach( fave => { %>
-    <div class="anime_favorite_list">
-      <h1><%= fave.anime_id %></h1>
-      <h1><%= fave.anime_title %></h1>
-      <h1><%= fave.anime_image %></h1>
-      <a href="/show/<%= fave.anime_id %>/comment">comment</a>
+    <div class="anime_favorite_item">
+      <div class="anime_favorite_image">
+        <img src="<%= fave.anime_image %>" alt="">
+      </div>
+      <div class="anime_favorite_info">
+        <p class="anime_favorite_title"><%= fave.anime_title %></p>
+      </div>
+
+      <a href="/show/<%= fave.anime_id %>/comment" class="anime_favorite_comment_link">comment</a>
     </div>
   <% }) %>
 
