@@ -139,15 +139,13 @@ models.findComment = (data) => {
   `, data);
 };
 
-models.updateComment = (id, data) => {
+models.updateComment = (data) => {
   return db.one(`
     UPDATE comments SET
-        user_id = $/data.user_id/,
-        anime_id = $/data.anime_id/,
-        comment = $/data.comment/,
-    WHERE id = $/id/
+        comment = $2
+    WHERE id = $1
     RETURNING *
-    `, { id, data });
+    `, data);
 };
 
 models.deleteComment = (id) => {

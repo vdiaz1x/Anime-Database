@@ -25,6 +25,7 @@ const views = require('../controller/views');
 router.route('/:id/comment')
   .get(controller.showComment, views.showComment)
   .post(controller.makeComment, controller.showComment, views.showComment)
+  .put(controller.updateComment, controller.showComment, views.showComment)
   .delete(controller.deleteComment, controller.showComment, views.showComment);
 
 // // set up routes for search and display shows

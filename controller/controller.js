@@ -281,11 +281,21 @@ controller.showComment = (req, res, next) => {
     });
 };
 
-controller.updateComment;
+controller.updateComment = (req, res, next) => {
+  // console.log('controller destroy');
+  console.log('req', req.body);
+
+  models.updateComment([req.body.id, req.body.comment])
+    .then(() => next())
+    .catch((err) => {
+      console.log('update comment error', err);
+      res.json(err);
+    });
+};
 
 controller.deleteComment = (req, res, next) => {
-  console.log('controller destroy');
-  console.log('req id', req.body.id);
+  // console.log('controller destroy');
+  // console.log('req id', req.body.id);
 
   models.deleteComment(req.body.id)
     .then(() => next())

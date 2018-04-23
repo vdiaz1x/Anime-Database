@@ -160,3 +160,11 @@ input{
   display:inline-block;
   width:49%;
 }
+
+textarea{color:black}
+
+.update_comment{}
+
+.none{
+  display: none;
+}

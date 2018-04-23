@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/style.css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+
+    $(()=>{
+      // jquery functions don't work with fat arrow
+      $(".update_link").on("click", function() {
+        $(this).prev(".update_comment").toggleClass("none");
+      })
+    })
+    // document.getElementById('comment_'+comment.id).addEventListener('click', ()=>{console.log('ayy',comment.id)})
+  </script>
   <title>AniME Database</title>
 </head>
 <body>
