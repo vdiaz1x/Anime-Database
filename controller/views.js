@@ -101,8 +101,7 @@ views.showOneShow = (req, res) => {
 */
 
 views.showFavorite = (req, res) => {
-  console.log('views show fave');
-  console.log(res.locals.anime);
+  console.log('views show fave', res.locals.anime);
   res.render('ejs/user/favorites', { favorites: res.locals.fave });
 };
 

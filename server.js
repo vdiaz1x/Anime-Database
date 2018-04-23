@@ -1,3 +1,9 @@
+/*
+|--------------------------------------------------------------------------
+| Imports
+|--------------------------------------------------------------------------
+*/
+
 // require the .env
 require('dotenv').config();
 
@@ -8,16 +14,19 @@ const parser = require('body-parser');
 const path = require('path');
 const override = require('method-override');
 const session = require('express-session');
-// const authService = require('./auth/service');
-// const authRouter = require('./auth/router');
 
 // setting up the routers
-// const routes = require('./routes/routes');
 const user = require('./routes/user');
 const shows = require('./routes/shows');
 
 // require.env config
 require('dotenv').config();
+
+/*
+|--------------------------------------------------------------------------
+| Port and Server Configuration
+|--------------------------------------------------------------------------
+*/
 
 // setting up the port
 const port = process.env.PORT || 4000;
@@ -56,8 +65,13 @@ app.use(override('_method'));
 app.listen(port, () => console.log(`Listening on port: ${port} in ${app.get('env')} mode!`))
   .on('error', console.error);
 
+/*
+|--------------------------------------------------------------------------
+| Routing
+|--------------------------------------------------------------------------
+*/
+
 // using router
-// app.use('/route', routes);
 app.use('/user', user);
 app.use('/show', shows);
 

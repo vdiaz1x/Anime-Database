@@ -15,39 +15,13 @@ const db = pgp(config);
 // creating object to export models
 const models = {};
 
-// models for main route
-
-// gets all table data
-// models.findAll = () => {
-//   console.log('models findall');
-//   return db.many(`
-//   SELECT * FROM users
-//   `);
-// };
-// // makes one data entry in table
-// models.saveOne = (data) => {
-//   console.log('models saveone');
-// };
-// // models for id route
-// // gets one table data entry
-// models.findById = (id) => {
-//   console.log('models findid');
-// };
-// // updates one table data entry
-// models.updateById = (id, data) => {
-//   console.log('models updateid');
-// };
-// // deletes one table data entry
-// models.deleteById = (id) => {
-//   console.log('models deleteid');
-// };
-
 /*
 |--------------------------------------------------------------------------
 | Users
 |--------------------------------------------------------------------------
 */
-// user
+
+// saves one user (registration)
 models.saveUser = (data) => {
   return db.one(`
   INSERT INTO users
@@ -62,6 +36,8 @@ models.saveUser = (data) => {
   RETURNING * `, data);
 };
 
+//finds user by id to display in profile
+// delete this function? seems to be obsolete
 models.findUserId = (id) => {
   return db.one(`
   SELECT *
@@ -70,6 +46,7 @@ models.findUserId = (id) => {
   `, id);
 };
 
+// find user by username to display in profile
 models.findUserName = (id) => {
   return db.one(`
   SELECT username, password_hash, id
@@ -84,7 +61,7 @@ models.findUserName = (id) => {
 |--------------------------------------------------------------------------
 */
 
-// favorites
+// saves a favorite anime in the db with relevant info
 models.saveFavorite = (data) => {
   return db.one(`
   INSERT INTO user_faves
@@ -99,6 +76,7 @@ models.saveFavorite = (data) => {
   RETURNING * `, data);
 };
 
+// finds all favorite anime from a specific user to display in favorites list
 models.findFavorite = (id) => {
   return db.many(`
   SELECT user_faves.anime_id,
@@ -117,6 +95,7 @@ models.findFavorite = (id) => {
 |--------------------------------------------------------------------------
 */
 
+// saves a comment for a specific anime in the db
 models.saveComment = (data) => {
   return db.one(`
   INSERT INTO comments
@@ -130,6 +109,7 @@ models.saveComment = (data) => {
   RETURNING * `, data);
 };
 
+// finds all comments for a specific anime by anime id to display in comment list
 models.findComment = (data) => {
   return db.many(`
   SELECT comments.*, user_faves.anime_title
@@ -139,6 +119,7 @@ models.findComment = (data) => {
   `, data);
 };
 
+// updates one comment in comment list, updates by id
 models.updateComment = (data) => {
   return db.one(`
     UPDATE comments SET
@@ -148,6 +129,7 @@ models.updateComment = (data) => {
     `, data);
 };
 
+// deletes one comment in comment list, deletes by id
 models.deleteComment = (id) => {
   return db.none(`
   DELETE

@@ -23,30 +23,32 @@ const views = require('../controller/views');
 
 // set up routes for user creation and authentification
 router.route('/new')
-  // gets form for signing up
+  // gets sign up form
   .get(views.showForm);
 
+// set up routes for getting user login form
 router.route('/login')
+  // gets login form
   .get(views.showLogin);
 
+// set up routes for getting and making profile for user info
 router.route('/profile')
-  // .get(controller.findUser, views.showUser, views.incorrectLogin)
+  // gets user profile
+  .get(controller.findUser, views.showUser, views.incorrectLogin)
+  // posts user login data
   .post(controller.login, views.showUser, views.incorrectLogin);
 
-router.route('/:id');
-// gets one thing
-// .get(controller.findUser, views.showUser, views.incorrectLogin);
-// // deletes one thing
-// .delete(controller.destroy, views.handleCreateDelete);
-
+// set up routes for the getting and making favorites
 router.route('/favorites')
+  // gets all shows
   .get(controller.showFavorite, views.showFavorite)
-  // favorites one show
-  .post(controller.makeFavorite, views.showFavorite);
+  // posts one favorite
+  .post(controller.makeFavorite, controller.showFavorite, views.showFavorite);
 
+// set up routes to make new user
 router.route('/')
-  // creates one user
+  // posts one user
   .post(controller.makeUser, views.handleCreateUser);
 
+// exporting router
 module.exports = router;
-
