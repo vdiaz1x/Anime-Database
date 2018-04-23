@@ -5,6 +5,10 @@
   <% comments.forEach( comment => { %>
     <h2><%= comment.anime_id %></h2>
     <h2><%= comment.comment %></h2>
+    <form action='?_method=delete' method='post'>
+      <input type="hidden" name="id" value="<%= comment.id %>">
+      <input type='submit' value='Delete'>
+    </form>
   <% }) %>
 
 <form action="/show/<%= comments[0].anime_id %>/comment" method="post">

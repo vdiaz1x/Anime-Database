@@ -251,7 +251,7 @@ controller.makeComment = (req, res, next) => {
       res.locals.comment = data;
       // console.log(data);
 
-      console.log('inside comment make', data);
+      // console.log('inside comment make', data);
       next();
     })
     .catch((err) => {
@@ -272,7 +272,7 @@ controller.showComment = (req, res, next) => {
       res.locals.comment = data;
       // console.log('controller', data);
 
-      console.log('inside comment find', data);
+      // console.log('inside comment find', data);
       next();
     })
     .catch((err) => {
@@ -283,6 +283,16 @@ controller.showComment = (req, res, next) => {
 
 controller.updateComment;
 
-controller.deleteComment;
+controller.deleteComment = (req, res, next) => {
+  console.log('controller destroy');
+  console.log('req id', req.body.id);
+
+  models.deleteComment(req.body.id)
+    .then(() => next())
+    .catch((err) => {
+      console.log('fave comment error', err);
+      res.json(err);
+    });
+};
 
 module.exports = controller;
