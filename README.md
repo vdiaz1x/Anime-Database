@@ -114,7 +114,7 @@ A page to display relevant information of the show queried
 
 ## Functional Components
 
-I did not keep an accurate list of how long each step took. However, roughly speaking, I spent 6 hrs planing the basics, about 8 hrs getting the server and MVC template going, 6 hrs on fetching and API, 6 hrs on authentification, 10 hrs on the MVC copletion, and about 8 on EJS
+I did not keep an accurate list of how long each step took. However, roughly speaking, I spent 6 hrs planing the basics, about 8 hrs getting the server and MVC template going, 6 hrs on fetching and API, 6 hrs on authentification, 10 hrs on the MVC copletion, and about 8 on EJS.
 
 ## Additional Libraries
 - starter server modules (express, morgan, body-parser, etc.)
@@ -125,7 +125,56 @@ I did not keep an accurate list of how long each step took. However, roughly spe
 
 ## Code Snippet
 
+```javascript
+// saves a user in the db using the make user model
+// hashes password before inserting into model
+controller.makeUser = async (req, res, next) => {
+  // this hashes the password from the req.body and saves it back in the same place
+  req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
 
+  // model used to save new user using the new user info stored in req.body
+  models.saveUser(req.body)
+    .then((data) => {
+      // saves data to locals for access in views
+      res.locals.data = data;
+      req.session.user = data;
+      // passes data on to views
+      next();
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+```
+This is the code to hash the password as you create a user. The example in class had it done as part of the db populating, and it had a lot of code not applicable to me. I played around with the bcrypt and figured out how to use the async/await notation to get it working. I felt clever after figuring this one out.
+
+```javascript
+// makes query of anime by using fetch and anime api to get data
+controller.search = (req, res, next) => {
+  // grabbing the search parameter for the actual query
+  // const parameter = req.body.parameter;
+  const parameter = 'genres';
+
+  // grabbing the query parameter from the req.body (from the search form)
+  const { query } = req.body;
+
+  // fetch call for API w/ dynamic variable
+  fetch(`https://kitsu.io/api/edge/anime?sort=popularityRank&page%5Blimit%5D=20&filter%5B${parameter}%5D=${query}`)
+    // parses the promise response to extract data
+    .then(res => res.json())
+    // gets actual fetched data
+    .then((json) => {
+      // saves data to locals for access in views
+      res.locals.anime = json;
+      // passes data on to views
+      next();
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+```
+
+I was freaking out at first when I didn't know how to use the API. I wracked my head in getting it to work but after an unproductivev Thursday night, Friday I had a breakthrough and figured it out both how to get the API data and pass it to the views. I used node-fetch for this fetch call.
 
 ## node/express Discoveries
 
@@ -158,9 +207,10 @@ Planning
 **ERROR**: data.forEach is not a function
 **RESOLUTION**: Had to fix how I passed data from the controller to the views
 
-There were a lot of errors, most of themm having to do with syntax and/or EJS rendering
+There were a lot of errors, most of them having to do with syntax and/or EJS rendering
 
 ## References
 
 The class lesson on auth and node-sessions for the authentification functions
 Help from classmates for clues/hints on how to approach specific problems
+The API documentation for my API, reading it carefully helped me out on how to use it

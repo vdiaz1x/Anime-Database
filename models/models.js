@@ -89,6 +89,7 @@ models.findFavorite = (id) => {
   `, id);
 };
 
+// finds one favorite anime (for populating comment ejs with data)
 models.findOneFavorite = (data) => {
   return db.one(`
     SELECT user_faves.anime_id,
@@ -98,7 +99,7 @@ models.findOneFavorite = (data) => {
     FROM user_faves
     JOIN users ON user_faves.user_id = users.id
     WHERE user_faves.user_id = $1 AND user_faves.anime_id = $2
-  `, data)
+  `, data);
 };
 
 /*
@@ -132,7 +133,7 @@ models.findComment = (data) => {
   `, data);
 };
 
-// updates one comment in comment list, updates by id
+// updates one comment in comment list, updates by comment id
 models.updateComment = (data) => {
   return db.one(`
     UPDATE comments SET
@@ -142,7 +143,7 @@ models.updateComment = (data) => {
     `, data);
 };
 
-// deletes one comment in comment list, deletes by id
+// deletes one comment in comment list, deletes by comment id
 models.deleteComment = (id) => {
   return db.none(`
   DELETE

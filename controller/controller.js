@@ -24,8 +24,6 @@ const controller = {};
 
 // finds the user by using the find user model for db query
 controller.findUser = (req, res, next) => {
-  // console.log('find user');
-  console.log(req.session.user);
   // model using the user's id in the session data as a parameter
   // will fail if there is no user in a session
   models.findUserId(req.session.user.id)
@@ -36,7 +34,6 @@ controller.findUser = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      // console.log(err);
       res.json(err);
     });
 };
@@ -47,7 +44,6 @@ controller.makeUser = async (req, res, next) => {
   // this hashes the password from the req.body and saves it back in the same place
   req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
 
-  console.log('here');
   // model used to save new user using the new user info stored in req.body
   models.saveUser(req.body)
     .then((data) => {
@@ -58,7 +54,6 @@ controller.makeUser = async (req, res, next) => {
       next();
     })
     .catch((err) => {
-      // console.log('error error error', err);
       res.json(err);
     });
 };
@@ -70,7 +65,6 @@ controller.login = async (req, res, next) => {
   try {
     // grabs username and password from request
     const { username, password } = req.body;
-    // console.log(req.body);
     // finds the user info from model
     const user = await models.findUserName(username);
 
@@ -90,7 +84,6 @@ controller.login = async (req, res, next) => {
     // passes data on to views
     next();
   } catch (err) {
-    // console.log('THIS IS THE ERROR', err);
     // passes error on to views
     next(err);
   }
@@ -157,7 +150,6 @@ controller.findOneShow = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      // console.log(err);
       res.json(err);
     });
 };
@@ -175,21 +167,16 @@ controller.makeFavorite = (req, res, next) => {
     .then((data) => {
       // saves data to locals for access in views
       res.locals.fave = data;
-      // console.log(data);
-      // console.log('inside fave', data);
       // passes data on to views
       next();
     })
     .catch((err) => {
-      // console.log('fave error', err);
       res.json(err);
     });
 };
 
 // shows all favorited anime in the db using the find favorite model
 controller.showFavorite = (req, res, next) => {
-  // console.log('show all favorites');
-
   // model used to find favorites using the user id in the session data as a parameter
   models.findFavorite(req.session.user.id)
     .then((data) => {
@@ -199,28 +186,20 @@ controller.showFavorite = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      // console.log('fave find error', err);
       res.json(err);
     });
 };
 
 controller.showOneFavorite = (req, res, next) => {
-  // console.log('show all favorites');
-
   // model used to find favorites using the user id in the session data as a parameter
-  // console.log('res.locals', res.locals.comment.id);
-  console.log('req.session', req.session.user);
-
   models.findOneFavorite([req.session.user.id, req.session.user.anime_id])
     .then((data) => {
       // saves data to locals for access in views
       res.locals.fave_one = data;
-      console.log('find one favorite', data);
       // passes data on to views
       next();
     })
     .catch((err) => {
-      // console.log('fave find error', err);
       res.json(err);
     });
 };
@@ -243,7 +222,6 @@ controller.makeComment = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      // console.log('comment error', err);
       res.json(err);
     });
 };
@@ -257,42 +235,32 @@ controller.showComment = (req, res, next) => {
     .then((data) => {
       // saves data to locals for access in views
       res.locals.comment = data;
-      // res.locals.comment.anim
-      // console.log('data', data);
       // passes data on to views
       next();
     })
     .catch((err) => {
-      // console.log('fave comment error', err);
       res.json(err);
     });
 };
 
 // updates comment on favorited anime using the update comment model
 controller.updateComment = (req, res, next) => {
-  // console.log('controller destroy');
-  // console.log('req', req.body);
-
   // model used to update comment using comment id and comment message as parameter
   models.updateComment([req.body.id, req.body.comment])
     // passes data on to views
     .then(() => next())
     .catch((err) => {
-      // console.log('update comment error', err);
       res.json(err);
     });
 };
 
 // deletes comment on favorited anime using the delete comment model
 controller.deleteComment = (req, res, next) => {
-  // console.log('controller destroy');
-  // console.log('req id', req.body.id);
   // model used to delete comment using comment id as parameter
   models.deleteComment(req.body.id)
     // passes data on to views
     .then(() => next())
     .catch((err) => {
-      // console.log('fave comment error', err);
       res.json(err);
     });
 };
