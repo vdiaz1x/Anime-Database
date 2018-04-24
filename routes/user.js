@@ -43,7 +43,7 @@ router.route('/favorites')
   // gets all shows
   .get(controller.showFavorite, views.showFavorite)
   // posts one favorite
-  .post(controller.makeFavorite, controller.showOneFavorite, controller.showFavorite, views.showFavorite);
+  .post(controller.makeFavorite, controller.showFavorite, views.showFavorite);
 
 // set up routes to make new user
 router.route('/')
