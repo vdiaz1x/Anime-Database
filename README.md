@@ -24,11 +24,9 @@ This project is a database for searching anime and for logging your list of favo
 
 ### Original Brainstorm
 
-[Part 1]()
+[Part 1](https://photos.app.goo.gl/8dk5qHYowipdowks1)
 
-[Part 2]()
-
-[Part 3]()
+[Part 2](https://photos.app.goo.gl/KwO9JmEJU92bNTtI2)
 
 ### Refined Wireframes
 

@@ -245,7 +245,7 @@ controller.showComment = (req, res, next) => {
 
 // updates comment on favorited anime using the update comment model
 controller.updateComment = (req, res, next) => {
-  // model used to update comment using comment id and comment message as parameter
+  // model used to update comment using comment id and comment messag-e as parameter
   models.updateComment([req.body.id, req.body.comment])
     // passes data on to views
     .then(() => next())

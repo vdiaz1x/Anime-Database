@@ -10,7 +10,7 @@ const pgp = require('pg-promise')();
 const config = require('../config/config');
 
 // set up db connection
-const db = pgp(config);
+const db = pgp(process.env.DATABASE_URL ||  config);
 
 // creating object to export models
 const models = {};
