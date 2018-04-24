@@ -44,8 +44,7 @@ This project is a database for searching anime and for logging your list of favo
 
 ## Video Presentation
 
-[Link to Video](https://www.youtube.com/watch?v=dkGUS4iJIvE&feature=youtu.be)
-Test video-
+[Link to Video](https://www.youtube.com/watch?v=c7x6Q_820kg&feature=youtu.be)
 
 ## Priority Matrix
 
