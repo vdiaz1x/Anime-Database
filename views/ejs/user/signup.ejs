@@ -2,12 +2,16 @@
 
 <h1>sign up</h1>
 
-<form action="/user" method="post">
-  <input type="text" name="fname" id="" placeholder="First Name">
-  <input type="text" name="lname" id="" placeholder="Last Name">
-  <input type="text" name="username" id="" placeholder="User Name">
-  <input type="password" name="password_hash" id="" placeholder="Password">
-  <input type="submit">
+<form action="/user" method="post"  class="anime_login">
+  <label class="anime_login_input" for="">First Name</label>
+  <input class="anime_login_input anime_login_text" type="text" name="fname" id="" placeholder="First Name">
+  <label class="anime_login_input" for="">Last Name</label>
+  <input class="anime_login_input anime_login_text" type="text" name="lname" id="" placeholder="Last Name">
+  <label class="anime_login_input" for="">Username</label>
+  <input class="anime_login_input anime_login_text" type="text" name="username" id="" placeholder="User Name">
+  <label class="anime_login_input" for="">Password</label>
+  <input class="anime_login_input anime_login_text" type="password" name="password_hash" id="" placeholder="Password">
+  <button class="anime_login_input anime_login_button" type="submit">Submit</button>
 </form>
 
 <% include ../partials/foot %>

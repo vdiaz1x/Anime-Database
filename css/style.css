@@ -62,6 +62,37 @@ input{
   color:black;
 }
 
+.anime_index{
+  margin:0 auto;
+  width:60vw;
+}
+
+.anime_index_link{
+  padding:20px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 26px;
+  width:30%;
+  display:inline-block;
+  text-align:center;
+  background:#111;
+}
+
+#search{
+  border:3px solid blue;
+  color:blue;
+}
+
+#signup{
+  border:3px solid green;
+  color:green;
+}
+
+#login{
+  border:3px solid purple;
+  color:purple;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Anime Query
@@ -143,6 +174,41 @@ input{
 
 /*
 |--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+*/
+
+.anime_login{
+  width:40%;
+  margin:0 auto;
+}
+
+.anime_login_input{
+  display: block;
+  padding:5px;
+}
+
+.anime_login_text{
+  background:black;
+  border:2px solid #555;
+  font-size:20px;
+  width:100%;
+  color:#eee;
+}
+
+.anime_login_button{
+  border:none;
+  padding:10px;
+  font-size:20px;
+  background:blue;
+  width:40%;
+  text-align:center;
+  margin-top:10px;
+  float:right;
+}
+
+/*
+|--------------------------------------------------------------------------
 | Search
 |--------------------------------------------------------------------------
 */
@@ -150,12 +216,12 @@ input{
 .anime_search_form{
   /* display: inline-block; */
   height:8vh;
-  width:60vw;
+  width:50vw;
   margin:0 auto;
 }
 
 .anime_search_bar{
-  width:70%;
+  width:85%;
   height:100%;
   box-sizing: border-box;
   padding:10px 20px;
@@ -168,6 +234,7 @@ input{
 
 .anime_search_button{
   height:100%;
+  width:15%;
   box-sizing: border-box;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -180,7 +247,7 @@ input{
 
 /*
 |--------------------------------------------------------------------------
-| Anime Show
+| Show
 |--------------------------------------------------------------------------
 */
 
@@ -196,8 +263,6 @@ input{
 .anime_show_section{
   width:33.3%;
 }
-
-.anime_dossier{}
 
 .anime_info{
   display:inline-block;
@@ -263,14 +328,9 @@ input{
   box-sizing:border-box;
   font-size:20px;
 }
-.anime_update_comment_form{
-}
 
 .none{
   display: none;
-}
-
-.anime_update_delete{
 }
 
 .anime_update_comment_link, .anime_delete_comment button{
@@ -311,7 +371,16 @@ textarea{
 .anime_comment_post_form{
   margin:0 auto;
   width:50%;
-}
-.anime_comment_post{
   display:block;
+  text-align: center;
+  margin-bottom:30px;
+}
+
+
+.anime_comment_post_button{
+  display:block;
+  width:100%;
+  padding:10px;
+  background:#111;
+  font-size:20px;
 }

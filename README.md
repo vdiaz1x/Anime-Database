@@ -7,18 +7,18 @@ Database to track user's anime favorites and search anime info
 
 |  Day | Deliverable | Complete? |
 |---|---|--|
-|Day 1: Wed| Project Idea, Wireframes, and Priority Matrix | // |
-|Day 2: Thurs| Project Approval and Pseudocode/Rough Template | // |
-|Day 3: Fri| MVC and Database| // |
-|Day 4: Sat| Fetch/API | // |
-|Day 5: Sun| Authentification| // |
-|Day 6: Mon| Bugs | // |
-|Day 7: Tues| Project Presentations | // |
+|Day 1: Wed| Project Idea, Wireframes, and Priority Matrix | Yes |
+|Day 2: Thurs| Project Approval and Pseudocode/Rough Template | Yes |
+|Day 3: Fri| MVC and Database| Yes |
+|Day 4: Sat| Fetch/API | Yes |
+|Day 5: Sun| Authentification| Yes |
+|Day 6: Mon| Bugs | Yes |
+|Day 7: Tues| Project Presentations | Yes |
 
 
 ## Project Description
 
-This project is a database for searching anime and for logging your list of watched shows via a user account.
+This project is a database for searching anime and for logging your list of favorite shows and adding comments to them via a user account.
 
 ## Wireframes
 
@@ -28,12 +28,25 @@ This project is a database for searching anime and for logging your list of watc
 
 [Part 2]()
 
+[Part 3]()
+
 ### Refined Wireframes
 
+[Part 1](https://photos.app.goo.gl/4z3fnsbVWEWkr0h72)
 
-## Presentation
+[Part 2](https://photos.app.goo.gl/NY2HolQFbUox7N0n1)
 
-[Link to PDF]()
+[Part 3](https://photos.app.goo.gl/VcpkwWUSrm0oej393)
+
+[Part 4](https://photos.app.goo.gl/EBCC60ksZP90ukqK2)
+
+[Part 5](https://photos.app.goo.gl/sd4zuBaoOlyo3IOf1)
+
+[Part 6](https://photos.app.goo.gl/1wSYAI1Xz5q7M3Ra2)
+
+## Video Presentation
+
+[Link to Video]()
 
 ## Priority Matrix
 
@@ -54,6 +67,8 @@ This project is a database for searching anime and for logging your list of watc
 
 ## User Stories
 
+This is a database app, so as expected, its goal is to be able to function as a database. I tried to model the functionality on sites like MAL (My Anime List) and AniList, where you have the ability to search through anime based on criteria and also make a list of shows watched with details. This app allows you to save the shows you like and the ability to add comments to each show, as well as edit and delete the comments. This is all accomplished by having a user account.
+
 ### User Account
 
 - As a user of this site, I expect to be able to sign up for an account
@@ -65,7 +80,7 @@ This project is a database for searching anime and for logging your list of watc
 - As a user, I expect to be able to use a search function to find shows
 - I expect the search to be able to find shows based on genre/other criteria (PostMVP)
 
-## Game Components
+## App Components
 
 ### Landing Page
 A simple intro page
@@ -81,130 +96,71 @@ A page to display relevant information of the show queried
 
 ## MVP
 
-<!-- ### Deliverables
+### Deliverables
 
-- Landing Page with Message (Get Name)
-- Select Player Avatar and Allies
-- Battle Screen with Boss and Allies as well as HP/MP meters
-- Battle Damage Calculation/Display
-- Basic Attack Animation/Notification
-- Win Con Based on Boss HP <= 0
-- Lose Con Based on Allies' HP <= 0
-- Return to Ally Select Screen
+- Create User and Authenticate User
+- User Sessions
+- Search Using API Call
+- Add to Favorites
+- Create, Update, and Delete Comments
 
 ## POST MVP
 
 ### Planned Expansion
 
-- Adding Attacks with Buff/Debuff
-- Attack Damage Randomizer
-- Detailed Display of Status
-- Tooltips
-- Different Enemies
-- Expand Ally Select
-- Mobile View
-- Dialogue in Battle
-- Change Boss Behavior Based on HP
+- Adding Rating
+- Query Based on More Parameters
+- Pagination
 
 ## Functional Components
 
-| Component | Priority | Estimated Time | Time Invetsted | Actual Time |
-| --- | :---: |  :---: | :---: | :---: |
-| Game Logic | H | 20hrs| 00hrs | 24hrs |
-| (Progress) | H | 3hrs| 00hrs | 4hrs |
-| (Turn Order) | H | 3hrs| 00hrs | 10hrs |
-| (Classes) | H | 3hrs| 00hrs | 2hrs |
-| (On-screen) | H | 4hrs| 00hrs | 4hrs |
-| (Damage) | H | 4hrs| 00hrs | 2hrs |
-| (Misc) | H | 3hrs| 00hrs | 4hrs |
-| Win Condition | H | 4hrs| 00hrs | 4hrs |
-| Basic Game Styling | M | 6hrs| 00hrs | 6hrs |
-| Landing Page | M | 00hrs| 2hrs | 2hrs |
-| Restart | M | 00hrs| 00hrs | 4hrs |
-| Total |  | 34hrs| 00hrs | 40hrs |
-| Advanced Game Styling | L | 5hrs| 00hrs | 00hrs |
-| PostMVP | L | 10hrs| 00hrs | 00hrs |
-| Super Total |  | 50hrs| 00hrs | 00hrs |
-
-My time estimates were way off. Also, I underestimated the scope and difficulty of this project.
-
-## Helper Functions
-
-| Function | Description |
-| --- | :---: |
-| Progress | Tracks progress of a quantity |
+I did not keep an accurate list of how long each step took. However, roughly speaking, I spent 6 hrs planing the basics, about 8 hrs getting the server and MVC template going, 6 hrs on fetching and API, 6 hrs on authentification, 10 hrs on the MVC copletion, and about 8 on EJS
 
 ## Additional Libraries
- JQuery - for DOM manipulation and other useful functions
+- starter server modules (express, morgan, body-parser, etc.)
+- bcrypt: for password hashing and comparison
+- node-fetch: for using fetch in node
+- Kitsu API for anime queries (https://kitsu.docs.apiary.io/#introduction/json-api)
+- JQuery: for simple DOM manipulation
 
 ## Code Snippet
 
-```javascript
-// function to loop attacks (i is entered as zero)
-// immediately invoked function expression
-(function atkLoop(i) {
-  // defining variable to not use the argument itself
-  let n = i;
 
-  const allyMove = setTimeout(() => {
-    // calling move function for one move
-    move(n);
 
-    // incrementing; this number is used to call the moves for the other allies
-    n += 1;
+## node/express Discoveries
 
-    // win condition
-    winCon();
+Chaining Functions in Router
+- i think we did this in class, but experimenting with it on my own gave me a better idea on how to map out all the views
 
-    // if win con is true, make counter 4 to prematurely end the loop
-    if (winCon()) {
-      n = 4;
-    }
-
-    // if the counter is less than 4, the loop continues with the next move
-    if (n < 4) {
-      atkLoop(n);
-    }
-    // the initial value for i is 0, the set timeout is every 2 seconds to space out the attacks
-  }, 2000);
-}(0));
-```
-
-I found the basic structure of this immediately invoking function expression that executes a setTimeout one after the other, rather than simultaneously. I had to heavily modify it for my use, but it still served as a solid base to make the game loop for the ally attacks. Basically, it has a parameter i, which you immediately pass an argument of zero at the end. Using a counter equal to the initial input, you use it inside a setTimeout where the move function is called with the argument of the counter. inside the setTimeout, increment the counter. The win con function is checked; if the win con is true, then the counter is set to a condition to end the loop. Otherwise, if the counter is less than 4, the function is called again. The way the function is structured, the next function call won't activate until the first function calll is completed, giving the illusion of stacking attacks in order.
-
-## jQuery Discoveries
-
-.each - loops through DOM elements grabbed by JQuery
-.off - removes event handlers made through .on
+Routing w/ Forms
+- i figured out how to make the 4 functions work on the same route, with help from the aforementioned
 
 ## Change Log
 
-I had to scale back the project a bit. I could not really implement the postMVP, although the main project is more or less done.
+There were several changes from the beginning of the project. I revlised my schema twice to make it easier to work with and incorporate more information. I could not get to more advanced EJS, but the core functionality is complete.
 
 ## Issues and Resolutions
 
-### Major Issue - Game Loop
+Rendering
+- There were issues in rendering the data passed from the views to the EJS. I had to figure out how I was passing it and how to access it correctly in the EJS.
 
-Unlike the high-low game, I could not pause the game via user input- the attacks had to be executed one after the other without making it simultaneous. Unlike the tic tac toe, the loop was not a simple player 1/player 2 situation. I found a way to do the loop with a recursive self invoking function.
+Routing
+- After a while, routing became a mess. I decided to segregate the routes based on either if it was a function of the user or of the shows. The auth was folded into the shows. All controllers are in one file, as well as all the view and all the models in their own file. Due to time contraints, I decided not to expand my file structure too much.
 
-### Major Issue - Creating Characters
+Planning
+- This happened in the last project too, but I felt it more here. Poor planning held me back from coding too much the first few days, from figuring out conceptually what I wanted to do to figuring out how to integrate the API fetch to the CRUD. I also did things out of order.
 
-Instead of creating objects for all of my characters, I made classes. I realized that the attacks also warranted their own class as well. However, whenever I had to change my code to make it more extendable, I had to edit the class definition. Using classes did make it easier to do any editing on my characters, though.
+#### Error/Resolution Sample
 
-#### Error/Resolution
+**ERROR**: Cannot read property 'id' of undefined
+**RESOLUTION**: Due to missing req.session data, re-login or refresh profile page fixed it
 
-**ERROR**: eslint regenerator-runtime, prefer iteration to loops
-**RESOLUTION**: Instead of using for...of loops for arrays, I used forEach
+**ERROR**: data.forEach is not a function
+**RESOLUTION**: Had to fix how I passed data from the controller to the views
 
-**ERROR**: eslint object deconstructing
-**RESOLUTION**: I had to switch the way I got the class name for my objects (minor semantic detail)
-
-**ERROR**: eslint function used before it was declared
-**RESOLUTION**: I moved function declarations higher up
+There were a lot of errors, most of themm having to do with syntax and/or EJS rendering
 
 ## References
 
-Final Fantasy 1 for basic layout
-Jason for several functions
-https://scottiestech.info/2014/07/01/javascript-fun-looping-with-a-delay/ for IIFE
-https://www.w3schools.com/howto/howto_js_progressbar.asp for basic progress meter -->
+The class lesson on auth and node-sessions for the authentification functions
+Help from classmates for clues/hints on how to approach specific problems

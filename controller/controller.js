@@ -24,7 +24,8 @@ const controller = {};
 
 // finds the user by using the find user model for db query
 controller.findUser = (req, res, next) => {
-  console.log('find user');
+  // console.log('find user');
+  console.log(req.session.user);
   // model using the user's id in the session data as a parameter
   // will fail if there is no user in a session
   models.findUserId(req.session.user.id)
@@ -35,7 +36,7 @@ controller.findUser = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       res.json(err);
     });
 };
@@ -46,16 +47,18 @@ controller.makeUser = async (req, res, next) => {
   // this hashes the password from the req.body and saves it back in the same place
   req.body.password_hash = await bcrypt.hash(req.body.password_hash, 11);
 
+  console.log('here');
   // model used to save new user using the new user info stored in req.body
   models.saveUser(req.body)
     .then((data) => {
       // saves data to locals for access in views
       res.locals.data = data;
+      req.session.user = data;
       // passes data on to views
       next();
     })
     .catch((err) => {
-      console.log('error error error', err);
+      // console.log('error error error', err);
       res.json(err);
     });
 };
@@ -86,12 +89,9 @@ controller.login = async (req, res, next) => {
     req.session.user = user;
     // passes data on to views
     next();
-  }
-
-  // catches error
-  catch (err) {
-    console.log('THIS IS THE ERROR', err);
-
+  } catch (err) {
+    // console.log('THIS IS THE ERROR', err);
+    // passes error on to views
     next(err);
   }
 };
@@ -103,11 +103,11 @@ controller.logout = (req, res, next) => {
 };
 
 // what does this do???
-controller.loginRequired = [
-  /* this is either going to resolve to next(false) or next(null) */
-  (req, res, next) => next(!req.session.user || null),
-  (err, req, res, next) => res.sendStatus(401),
-];
+// controller.loginRequired = [
+//   /* this is either going to resolve to next(false) or next(null) */
+//   (req, res, next) => next(!req.session.user || null),
+//   (err, req, res, next) => res.sendStatus(401),
+// ];
 
 /*
 |--------------------------------------------------------------------------
@@ -123,7 +123,7 @@ controller.search = (req, res, next) => {
   const parameter = 'genres';
 
   // grabbing the query parameter from the req.body (from the search form)
-  const query = req.body.query;
+  const { query } = req.body;
 
   // fetch call for API w/ dynamic variable
   fetch(`https://kitsu.io/api/edge/anime?sort=popularityRank&page%5Blimit%5D=20&filter%5B${parameter}%5D=${query}`)
@@ -144,9 +144,9 @@ controller.search = (req, res, next) => {
 // finds one show by using fetch and anime api to get data
 controller.findOneShow = (req, res, next) => {
   // getting the anime id from the id parameter in the url
-  const anime_id = req.params.id;
+  const animeId = req.params.id;
   // fetch call for API w/ anime id
-  fetch(`https://kitsu.io/api/edge/anime/${anime_id}`)
+  fetch(`https://kitsu.io/api/edge/anime/${animeId}`)
     // parses the promise response to extract data
     .then(res => res.json())
     // gets actual fetched data
@@ -176,19 +176,19 @@ controller.makeFavorite = (req, res, next) => {
       // saves data to locals for access in views
       res.locals.fave = data;
       // console.log(data);
-      console.log('inside fave', data);
+      // console.log('inside fave', data);
       // passes data on to views
       next();
     })
     .catch((err) => {
-      console.log('fave error', err);
+      // console.log('fave error', err);
       res.json(err);
     });
 };
 
 // shows all favorited anime in the db using the find favorite model
 controller.showFavorite = (req, res, next) => {
-  console.log('show all favorites');
+  // console.log('show all favorites');
 
   // model used to find favorites using the user id in the session data as a parameter
   models.findFavorite(req.session.user.id)
@@ -199,7 +199,7 @@ controller.showFavorite = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      console.log('fave find error', err);
+      // console.log('fave find error', err);
       res.json(err);
     });
 };
@@ -212,7 +212,8 @@ controller.showFavorite = (req, res, next) => {
 
 // makes a comment on favorite anime using the save comment model
 controller.makeComment = (req, res, next) => {
-  // model used to save comment using the user id in the session data, the anime id, and the comment message
+  // model used to save comment using the user id in the session data,
+  // the anime id, and the comment message
   models.saveComment([req.session.user.id, req.body.anime_id, req.body.comment])
     .then((data) => {
       // saves data to locals for access in views
@@ -221,14 +222,15 @@ controller.makeComment = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      console.log('comment error', err);
+      // console.log('comment error', err);
       res.json(err);
     });
 };
 
 // shows comments on favorite anime using the find comment model
 controller.showComment = (req, res, next) => {
-  // model used to find comments using the user id in the session data and the anime id found in the id parameter of the url
+  // model used to find comments using the user id in the session data and the anime id
+  // found in the id parameter of the url
   models.findComment([req.session.user.id, req.params.id])
     .then((data) => {
       // saves data to locals for access in views
@@ -237,7 +239,7 @@ controller.showComment = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      console.log('fave comment error', err);
+      // console.log('fave comment error', err);
       res.json(err);
     });
 };
@@ -245,14 +247,14 @@ controller.showComment = (req, res, next) => {
 // updates comment on favorited anime using the update comment model
 controller.updateComment = (req, res, next) => {
   // console.log('controller destroy');
-  console.log('req', req.body);
+  // console.log('req', req.body);
 
   // model used to update comment using comment id and comment message as parameter
   models.updateComment([req.body.id, req.body.comment])
     // passes data on to views
     .then(() => next())
     .catch((err) => {
-      console.log('update comment error', err);
+      // console.log('update comment error', err);
       res.json(err);
     });
 };
@@ -266,7 +268,7 @@ controller.deleteComment = (req, res, next) => {
     // passes data on to views
     .then(() => next())
     .catch((err) => {
-      console.log('fave comment error', err);
+      // console.log('fave comment error', err);
       res.json(err);
     });
 };

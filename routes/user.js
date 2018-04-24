@@ -48,7 +48,7 @@ router.route('/favorites')
 // set up routes to make new user
 router.route('/')
   // posts one user
-  .post(controller.makeUser, views.handleCreateUser);
+  .post(controller.makeUser, controller.findUser, views.showUser);
 
 // exporting router
 module.exports = router;

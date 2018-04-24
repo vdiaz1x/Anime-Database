@@ -27,11 +27,11 @@
     <% }) %>
   </div>
 
-<form action="/show/<%= comments[0].anime_id %>/comment" method="post" class="anime_comment_form">
-  <textarea class="anime_comment_post_form" name="comment"></textarea>
+<form action="/show/<%= comments[0].anime_id %>/comment" method="post" class="anime_comment_post_form">
+  <textarea class="anime_comment_post_text" name="comment"></textarea>
   <input type="hidden" name="anime_id" value="<%= comments[0].anime_id %>">
   <input type="hidden" name="user_id" value="<%= comments[0].user_id %>">
-  <button type="submit">Submit New Comment</button>
+  <button class="anime_comment_post_button" type="submit">Submit New Comment</button>
 </form>
 
 

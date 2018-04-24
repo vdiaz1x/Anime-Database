@@ -8,28 +8,6 @@
 // storing view functions in an object for export
 const views = {};
 
-// shows the ejs for all data query
-views.showAll = (req, res) => {
-  console.log('views showall');
-  res.send(res.locals.data);
-};
-// shows the ejs for one data query
-views.showOne = (req, res) => {
-  console.log('views showone');
-  res.send('hello');
-};
-
-// redirects for create one data entry
-views.handleCreateDelete = (req, res) => {
-  console.log('views handlecreatedelete');
-  // res.redirect('hello');
-};
-// redirects for updating one data entry
-views.handleUpdate = (req, res) => {
-  console.log('views handleupdate');
-  // res.redirect('hello');
-};
-
 /*
 |--------------------------------------------------------------------------
 | Users
@@ -39,19 +17,19 @@ views.handleUpdate = (req, res) => {
 // users
 // shows the ejs for the form
 views.showForm = (req, res) => {
-  console.log('views showform');
+  // console.log('views showform');
   res.render('ejs/user/signup');
 };
 
 views.showLogin = (req, res) => {
-  console.log('views showform');
+  // console.log('views showform');
   res.render('ejs/user/login');
 };
 
 views.handleCreateUser = (req, res) => {
-  console.log('views handle create user');
+  // console.log('views handle create user');
   // console.log(res.locals.data)
-  res.redirect(`user/${res.locals.data.id}`);
+  res.redirect('user/profile');
 };
 
 views.showUser = (req, res) => {
@@ -61,7 +39,7 @@ views.showUser = (req, res) => {
 };
 
 views.incorrectLogin = (err, req, res, next) => {
-  console.log('views error user');
+  // console.log('views error user');
   res.render('ejs/user/error');
 };
 // views.handleLogIn = (req, res) => {
@@ -77,7 +55,7 @@ views.incorrectLogin = (err, req, res, next) => {
 
 // shows
 views.showSearch = (req, res) => {
-  console.log('show');
+  // console.log('show');
   res.render('ejs/shows/search');
 };
 
@@ -89,7 +67,7 @@ views.showAllShows = (req, res) => {
 };
 
 views.showOneShow = (req, res) => {
-  console.log(res.locals.anime_one);
+  // console.log(res.locals.anime_one);
   // res.json(req);
   res.render('ejs/shows/show', { anime: res.locals.anime_one });
 };
@@ -101,7 +79,7 @@ views.showOneShow = (req, res) => {
 */
 
 views.showFavorite = (req, res) => {
-  console.log('views show fave', res.locals.anime);
+  // console.log('views show fave', res.locals.anime);
   res.render('ejs/user/favorites', { favorites: res.locals.fave });
 };
 
@@ -112,14 +90,14 @@ views.showFavorite = (req, res) => {
 */
 
 views.showComment = (req, res) => {
-  console.log(res.locals.comment);
+  // console.log(res.locals.comment);
   // res.json(res.locals.comment);
   res.render('ejs/shows/comments', { comments: res.locals.comment });
   // console.log({ comment: res.locals.comment });
 };
 
 views.showOneComment = (req, res) => {
-  console.log(res.locals.comment_one);
+  // console.log(res.locals.comment_one);
   res.json(res.locals.comment_one);
   // res.render('ejs/shows/show', { comment_one: res.locals.comment_one });
 };
