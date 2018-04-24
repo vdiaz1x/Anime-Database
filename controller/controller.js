@@ -204,6 +204,27 @@ controller.showFavorite = (req, res, next) => {
     });
 };
 
+controller.showOneFavorite = (req, res, next) => {
+  // console.log('show all favorites');
+
+  // model used to find favorites using the user id in the session data as a parameter
+  // console.log('res.locals', res.locals.comment.id);
+  console.log('req.session', req.session.user);
+
+  models.findOneFavorite([req.session.user.id, req.session.user.anime_id])
+    .then((data) => {
+      // saves data to locals for access in views
+      res.locals.fave_one = data;
+      console.log('find one favorite', data);
+      // passes data on to views
+      next();
+    })
+    .catch((err) => {
+      // console.log('fave find error', err);
+      res.json(err);
+    });
+};
+
 /*
 |--------------------------------------------------------------------------
 | Comments
@@ -231,10 +252,13 @@ controller.makeComment = (req, res, next) => {
 controller.showComment = (req, res, next) => {
   // model used to find comments using the user id in the session data and the anime id
   // found in the id parameter of the url
+  req.session.user.anime_id = req.params.id;
   models.findComment([req.session.user.id, req.params.id])
     .then((data) => {
       // saves data to locals for access in views
       res.locals.comment = data;
+      // res.locals.comment.anim
+      // console.log('data', data);
       // passes data on to views
       next();
     })

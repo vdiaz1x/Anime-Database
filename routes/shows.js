@@ -24,13 +24,13 @@ const views = require('../controller/views');
 // set up route for getting, making, updating, and deleting comments
 router.route('/:id/comment')
   // gets all comments
-  .get(controller.showComment, views.showComment)
+  .get(controller.showComment, controller.showOneFavorite, views.showComment)
   // posts one comment
-  .post(controller.makeComment, controller.showComment, views.showComment)
+  .post(controller.makeComment, controller.showComment, controller.showOneFavorite, views.showComment)
   // puts one comment
-  .put(controller.updateComment, controller.showComment, views.showComment)
+  .put(controller.updateComment, controller.showComment, controller.showOneFavorite, views.showComment)
   // deletes one comments
-  .delete(controller.deleteComment, controller.showComment, views.showComment);
+  .delete(controller.deleteComment, controller.showComment, controller.showOneFavorite, views.showComment);
 
 // set up routes for search via API and getting shows
 router.route('/search')

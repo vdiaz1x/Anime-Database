@@ -89,6 +89,18 @@ models.findFavorite = (id) => {
   `, id);
 };
 
+models.findOneFavorite = (data) => {
+  return db.one(`
+    SELECT user_faves.anime_id,
+           user_faves.anime_title,
+           user_faves.anime_image,
+           users.id AS user
+    FROM user_faves
+    JOIN users ON user_faves.user_id = users.id
+    WHERE user_faves.user_id = $1 AND user_faves.anime_id = $2
+  `, data)
+};
+
 /*
 |--------------------------------------------------------------------------
 | Comments

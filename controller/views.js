@@ -38,7 +38,7 @@ views.showUser = (req, res) => {
   // console.log('THIS IS USER', user);
 };
 
-views.incorrectLogin = (err, req, res, next) => {
+views.incorrectLogin = (err, req, res) => {
   // console.log('views error user');
   res.render('ejs/user/error');
 };
@@ -92,7 +92,7 @@ views.showFavorite = (req, res) => {
 views.showComment = (req, res) => {
   // console.log(res.locals.comment);
   // res.json(res.locals.comment);
-  res.render('ejs/shows/comments', { comments: res.locals.comment });
+  res.render('ejs/shows/comments', { comments: res.locals.comment, fave: res.locals.fave_one });
   // console.log({ comment: res.locals.comment });
 };
 

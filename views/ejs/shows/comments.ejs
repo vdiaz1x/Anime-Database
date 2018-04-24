@@ -1,7 +1,7 @@
 <% include ../partials/head %>
 
 <h3>Comments</h3>
-<h1><%= comments[0].anime_title %></h1>
+<h1><%= fave.anime_title %></h1>
   <div class="anime_comment_list">
     <% comments.forEach( comment => { %>
     <div class="anime_comment_container">
@@ -12,26 +12,26 @@
       <form class="anime_update_comment_form none" action="/show/<%= comments[0].anime_id %>/comment?_method=put" method="post" id="comment_<%= comment.id %>">
         <textarea name="comment"><%= comment.comment %></textarea>
         <input type="hidden" name="id" value="<%= comment.id %>">
-       <button class="anime_update_button" type="submit">Update!</button>
+       <button class="anime_update_button" type="submit"><i class="fa fa-edit"></i> Update!</button>
       </form>
 
         <div class="anime_update_delete">
-          <div class="anime_update_comment_link">Update</div>
+          <div class="anime_update_comment_link"><i class="fa fa-edit"></i> Update</div>
 
           <form action='?_method=delete' method='post' class="anime_delete_comment">
             <input type="hidden" name="id" value="<%= comment.id %>">
-            <button type="submit">Delet This</button>
+            <button type="submit"><i class="fa fa-trash"></i> Delet This</button>
           </form>
         </div>
       </div>
     <% }) %>
   </div>
 
-<form action="/show/<%= comments[0].anime_id %>/comment" method="post" class="anime_comment_post_form">
+<form action="/show/<%= fave_one.anime_id %>/comment" method="post" class="anime_comment_post_form">
   <textarea class="anime_comment_post_text" name="comment"></textarea>
-  <input type="hidden" name="anime_id" value="<%= comments[0].anime_id %>">
-  <input type="hidden" name="user_id" value="<%= comments[0].user_id %>">
-  <button class="anime_comment_post_button" type="submit">Submit New Comment</button>
+  <input type="hidden" name="anime_id" value="<%= fave_one.anime_id %>">
+  <input type="hidden" name="user_id" value="<%= fave_one.user %>">
+  <button class="anime_comment_post_button" type="submit"><i class="fa fa-comment"></i> Submit New Comment</button>
 </form>
 
 

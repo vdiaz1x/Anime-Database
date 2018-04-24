@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
 });
 
 // error route
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error('what error is this', err);
-  res.status(400).send('Ya broke it!');
+  res.status(400).render('ejs/err');
 });

@@ -19,9 +19,15 @@ header, footer{
   background:#111;
 }
 
-header{height:15vh;}
+header{
+  height:15vh;
+}
 
-footer{height:15vh;}
+footer{
+  height:15vh;
+  display: flex;
+  align-items: center;
+}
 
 /* container */
 .content{
@@ -44,18 +50,21 @@ footer{height:15vh;}
 
 ul{
   list-style: none;
-  height: 100%;
+  height: 40%;
 }
 
 a{
   text-decoration: none;
   width:20%;
-  background:#333
+  background:#333;
+  text-align:center;
 }
 
 li{
   /* display: inline-block; */
-  width:20%;
+  font-family: 'Oswald', sans-serif;
+  width: 50%;
+  display: inline-block;
 }
 
 input{
@@ -91,6 +100,12 @@ input{
 #login{
   border:3px solid purple;
   color:purple;
+}
+
+.anime_nav{
+  padding:10px;
+  font-size:18px;
+  border:3px solid #666;
 }
 
 /*
@@ -194,6 +209,7 @@ input{
   font-size:20px;
   width:100%;
   color:#eee;
+  padding:10 0px;
 }
 
 .anime_login_button{
@@ -303,6 +319,7 @@ input{
   padding:20px;
   text-align:center;
   background:#444;
+  font-size: 20px;
 }
 
 /*
@@ -349,8 +366,9 @@ input{
 .anime_update_button{
   background:blue;
   width:100%;
-  padding:5px 0;
+  padding:10px 0;
   border:none;
+  font-size: 20px;
 }
 
 .anime_delete_comment button{
